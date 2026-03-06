@@ -16,7 +16,7 @@ body {
 /* Den limegröna knappen */
 .btn-gym {
     background-color: var(--gym-lime);
-    color: black;
+    color: #0A0A0A !important;
     border: none;
     padding: 10px 24px;
     border-radius: 30px;
@@ -30,3 +30,72 @@ body {
         opacity: 0.8;
         transform: scale(1.05);
     }
+
+.hero-container {
+    background-color: var(--bg-dark);
+    background-image: url('/images/right-column.svg'); /* Namnet på din bild */
+    background-repeat: no-repeat;
+    background-position: right center; /* Placerar paret till höger */
+    background-size: contain; /* Gör att hela paret syns utan att beskäras för mycket */
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    padding-left: 10%;
+    background-position: 88% center;
+}
+
+.hero-subtitle {
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.hero-title {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin: 20px 0;
+    font-weight: 900;
+}
+
+.hero-text {
+    color: #FFFFFF;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+.hero-features {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-white);
+}
+
+.logo-bar {
+    background-color: var(--gym-lime);
+    color: black;
+    padding: 20px 10%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px; /* Mellanrum mellan pricken och texten */
+    background-color: rgba(255, 255, 255, 0.1); /* Halvgenomskinlig bakgrund som i skissen */
+    padding: 8px 20px;
+    border-radius: 30px;
+}
+
+.dot {
+    height: 8px;
+    width: 8px;
+    background-color: #CCFF00; /* Din limegröna färg */
+    border-radius: 50%; /* Gör den helt rund */
+    display: inline-block;
+}
