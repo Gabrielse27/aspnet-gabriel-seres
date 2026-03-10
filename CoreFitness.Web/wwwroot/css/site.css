@@ -1,7 +1,7 @@
 :root {
     --bg-dark: #0A0A0A;
     --card-dark: #1A1A1A;
-    --gym-lime: #CCFF00; /* Din limegröna färg från skissen */
+    --gym-lime: #D6EB31; /* Din limegröna färg från skissen */
     --text-white: #FFFFFF;
     --text-gray: #B0B0B0;
 }
@@ -11,6 +11,7 @@ body {
     color: var(--text-white);
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
+    background-color: #ffffff
 }
 
 /* Den limegröna knappen */
@@ -41,7 +42,12 @@ body {
     display: flex;
     align-items: center;
     padding-left: 10%;
-    background-position: 88% center;
+    background-position: 80% center;
+}
+
+.hero-content{
+    margin-left: 5rem;
+
 }
 
 .hero-subtitle {
@@ -56,6 +62,7 @@ body {
     line-height: 1.1;
     margin: 20px 0;
     font-weight: 900;
+    
 }
 
 .hero-text {
@@ -75,13 +82,42 @@ body {
 
 .logo-bar {
     background-color: var(--gym-lime);
+    border-radius: 1rem;
+    margin-top: 1rem;
     color: black;
-    padding: 20px 10%;
+    padding: 20px 1%;
     display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-    text-transform: uppercase;
+    justify-content: flex-start; /* Prova denna för bättre fördelning */
+    gap: 1rem;
+   
+    font-weight: bold; 
 }
+
+
+
+.logo-item img {
+    height: 30px; /* Ändra detta värde för att göra dem mindre (t.ex. 20px) */
+    width: auto; /* Bibehåller proportionerna så de inte blir utdragna */
+    opacity: 0.8; /* Valfritt: gör dem lite diskretare som i Figma */
+    margin-left: 2rem;
+  
+}
+.logo-item {
+    flex-shrink: 1; /* Tillåter objekten att bli lite mindre om det behövs */
+    font-size: 1.5rem; /* Minska textstorleken */
+
+}
+
+.logo-item-accent {
+    margin-left: auto; /* Denna fungerar som en magnet som trycker bort allt till vänster */
+    padding-right: 10%; /* Ger lite luft till högerkanten, precis som i Figma */
+    text-transform: uppercase;
+    font-weight: bold;
+    display: flex; /* Lägg till denna för att säkerställa att den beter sig rätt */
+    align-items: center;
+    font-size: 1.5rem;
+}
+
 
 .status-badge {
     display: inline-flex;
@@ -99,3 +135,18 @@ body {
     border-radius: 50%; /* Gör den helt rund */
     display: inline-block;
 }
+
+.main-footer {
+    background-color: #000000; /* Svart bakgrund för att skilja den från den gula baren */
+    color: #B0B0B0; /* Grå textfärg */
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.8rem;
+    border-top: 1px solid #333; /* En tunn linje för att markera slutet */
+    width: 100%;
+}
+
+    .main-footer a {
+        color: var(--gym-lime); /* Gör länken limegrön */
+        text-decoration: none;
+    }
