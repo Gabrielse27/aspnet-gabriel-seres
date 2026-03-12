@@ -19,12 +19,16 @@ body {
     background-color: var(--gym-lime);
     color: #0A0A0A !important;
     border: none;
-    padding: 10px 24px;
+    padding: 12px 24px;
     border-radius: 30px;
     font-weight: bold;
     text-decoration: none;
-    display: inline-block;
+    display: inline-flex;
     transition: 0.3s;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+  
 }
 
     .btn-gym:hover {
@@ -32,17 +36,42 @@ body {
         transform: scale(1.05);
     }
 
+.arrow-right {
+    margin-top: 1.2rem;
+    align-items: center;
+
+}
+
+
+.btn-gym-getstarted {
+    background-color: var(--gym-lime);
+    color: #0A0A0A !important;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-flex;
+    transition: 0.3s;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 3rem;
+}
+
 .hero-container {
+    padding-top: 12rem;
     background-color: var(--bg-dark);
-    background-image: url('/images/right-column.svg'); /* Namnet på din bild */
+    background-image: url('/images/right-column.svg'); 
     background-repeat: no-repeat;
     background-position: right center; /* Placerar paret till höger */
     background-size: contain; /* Gör att hela paret syns utan att beskäras för mycket */
-    height: 80vh;
+    height: 90vh;
     display: flex;
     align-items: center;
     padding-left: 10%;
     background-position: 80% center;
+    padding-bottom: 10rem;
 }
 
 .hero-content{
@@ -58,17 +87,19 @@ body {
 }
 
 .hero-title {
+    color: #ffffff;
     font-size: 3rem;
     line-height: 1.1;
     margin: 20px 0;
     font-weight: 900;
+    
     
 }
 
 .hero-text {
     color: #FFFFFF;
     margin-bottom: 30px;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .hero-features {
@@ -150,3 +181,135 @@ body {
         color: var(--gym-lime); /* Gör länken limegrön */
         text-decoration: none;
     }
+
+
+.hero-getstarted-butons {
+    margin-top: 0.1rem; /* Justera siffran för att flytta den mer eller mindre */
+
+}
+
+.hero-features-icons {
+    margin-top: 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Skapar två lika breda kolumner */
+    gap: 20px; /* Avstånd mellan raderna och kolumnerna */
+    margin-bottom: 30px; /* Avstånd ner till knappen */
+    max-width: 600px; /* Justera så att det passar din design */
+}
+
+    .hero-features-icons span {
+        display: flex; /* Lägger ikon och text bredvid varandra */
+        align-items: center; /* Centrerar ikonen vertikalt med texten */
+        gap: 10px; /* Avstånd mellan ikonen och texten */
+        color: white;
+        font-size: 16px;
+    }
+
+.feature-icon {
+    width: 20px; /* Justera storleken på din bock-ikon */
+    height: auto;
+}
+
+.separator-line {
+    margin-top: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(214, 200, 49, 0.3); /* Din limegröna färg med lite genomskinlighet */
+    margin: 30px 0; /* Skapar avstånd ovanför och under linjen */
+    width: 100%; /* Gör att den sträcker sig över hela bredden */
+}
+
+.about-section {
+    padding: 80px 0;
+    background-color: #ffffff; /* Eller den färg du föredrar */
+    color: #000;
+}
+
+.about-container {
+    max-width: 1300px;
+    
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 0 20px;
+}
+
+/* Bild-layouten */
+.about-images {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+   
+}
+
+.image-wrapper {
+    width: 500px;
+    height: 700px;
+    overflow: hidden;
+    transform: skewX(-7deg); /* Detta ger den lutande effekten från bilden */
+    border-radius: 10px;
+    margin-left: 1rem;
+    
+}
+
+    .image-wrapper img {
+        min-width: 120%;
+        height: 100%;
+       
+        transform: skewX(5deg) scale(1.0); /* Motverka lutningen på själva bilden */
+        display: flex;
+        
+    }
+
+/* Text-layouten */
+.about-content {
+    flex: 1;
+}
+
+.badge-about {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 20px;
+    font-size: 12px;
+    display: inline-block;
+    margin-bottom: 20px;
+   
+}
+
+
+    .badge-about .dot {
+        margin-right: 0.5rem; 
+        margin-left: 0;
+    }
+
+.about-content h2 {
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: #27252F;
+    
+}
+
+.about-content p {
+    color: #575757;
+    font-size: 1rem;
+}
+
+/* Den vita boxen med citatet */
+.mission-box {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 15px;
+    position: relative;
+    margin-top: 4rem;
+    
+
+.mission-box p {
+        font-weight: 400;
+        font-size: 1rem;
+        color: #0A0A0A !important;
+        margin: 0;
+       
+  }
