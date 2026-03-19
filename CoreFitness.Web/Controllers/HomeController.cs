@@ -11,6 +11,11 @@ namespace CoreFitness.Web.Controllers
             return View();
         }
 
+        public IActionResult Memberships()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

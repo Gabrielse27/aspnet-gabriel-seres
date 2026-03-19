@@ -188,8 +188,14 @@
       max-width: 96rem;
     }
   }
+  .block {
+    display: block;
+  }
   .flex {
     display: flex;
+  }
+  .grid {
+    display: grid;
   }
   .table {
     display: table;
@@ -225,6 +231,9 @@
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
+  }
+  .text-center {
+    text-align: center;
   }
   .underline {
     text-decoration-line: underline;
