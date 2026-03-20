@@ -5,9 +5,11 @@
     --text-white: #FFFFFF;
     --text-gray: #B0B0B0;
 }
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-.body {
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.body {
     background-color: var(--bg-dark);
     color: var(--text-white);
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -997,3 +999,193 @@ photo-faq-left {
 .accordion-item.active .arrow::after {
     transform: rotate(-135deg); /* Pilen pekar uppåt när den är öppen */
 }
+
+
+
+
+
+  /*Customer Service-section*/
+/* Själva kortet som håller bilden */
+
+.customer-service-section {
+    padding-top: 40px; /* Sänk detta värde om det är för mycket luft högst upp */
+    background-color: #F8F9FA; /* Om du vill ha samma gråa färg som i Figma över hela ytan */
+}
+
+
+
+.container-customerservice {
+    display: flex; /* Aktiverar Flexbox */
+    gap: 4px; /* Skapar mellanrum mellan kolumnerna */
+    
+    align-items: stretch; /* Detta gör att båda sidorna strävar efter att vara lika långa */
+    padding: 60px 20px;
+    max-width: 1200px; /* Förhindrar att sidan blir bredare än 1200px */
+    margin: 0 auto; /* Centrerar hela boxen i mitten av skärmen */
+}
+
+.customerservice-main-title {
+    font-size: 36px;
+    font-weight: 600;
+    margin-top: 2rem;
+    text-align: center;
+    color: #1A1A1A;
+}
+
+.cs-contact-card {
+    position: relative;
+    margin-top: 8rem;
+    position: relative; /* Viktigt! Detta gör att overlayen klistras mot kortet, inte skärmen */
+    /* Rundade hörn som på bilden */
+    overflow: hidden; /* Ser till att ingenting sticker ut utanför hörnen */
+    width: 100%; /* Tar upp tillgänglig bredd (t.ex. i ett flex-grid) */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Mjuk skugga för lite djup */
+    /* Här anger du: uppe-vänster, uppe-höger, nere-höger, nere-vänster */
+    border-radius: 20px 0 0 20px;
+}
+
+/* Själva bilden */
+.cs-image {
+    width: 100%;
+    height: auto;
+    display: block; /* Tar bort tomrum under bilden */
+   
+}
+
+/* Den gråa rutan (overlay) */
+.cs-contact-overlay {
+    position: absolute;
+    bottom: 30px; /* Avstånd från botten av bilden */
+    left: 10px; /* Avstånd från vänster sida */
+    right: 20px; /* Sträcker sig nästan över hela bredden */
+    background-color: #404040; /* Svart färg */
+    padding: 20px 25px; /* Luft inuti rutan */
+    border-radius: 18px;
+    
+    display: flex;
+    justify-content: space-around; /* Jämn fördelning av telefon och e-post */
+    align-items: center;
+    color: white; /* Textfärg */
+   
+}
+
+/* Varje kontakt-enhet (ikon + text) */
+.cs-info-item {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Avstånd mellan cirkeln och texten */
+}
+
+/* Den limegröna cirkeln med ikonen */
+.icon-circle {
+    width: 45px;
+    height: 45px;
+    background-color: #D2EF39; /* Din limegröna färg */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a1a1a; /* Ikonens färg (svart) */
+    font-size: 18px; /* Ikonens storlek */
+}
+
+/* Text-delen bredvid cirkeln */
+.info-text {
+    display: flex;
+    flex-direction: column;
+}
+
+    /* Den mindre gråa etiketten */
+    .info-text.label {
+        font-size: 12px;
+        color: #a0a0a0; /* Grå text */
+        margin-bottom: 2px;
+    }
+
+    /* Det faktiska numret/e-posten */
+    .info-text.value {
+        font-size: 15px;
+        font-weight: 600; /* Halvfet text */
+    }
+
+
+
+
+
+
+
+    /*Formulär-Customer_Service*/
+/*Formulär-Customer_Service*/
+
+
+/* Formulär-rader */
+.cs-form-row {
+    display: flex; /* Lägger First och Last Name bredvid varandra */
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.cs-form-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+.cs-form-text {
+    font-size: 16px;
+    margin-bottom: 2rem;
+    color: #6F6F6F;
+}
+
+.cs-input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+    /* Input-fältens utseende */
+    .cs-input-group input,
+    .cs-input-group textarea {
+        background-color: #F4F4F4; /* Ljusgrå bakgrund enligt Figma */
+        border: none;
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 8px;
+    }
+
+.cs-submit-btn {
+    background-color: #D2EF39; /* Limegrön färg */
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px; /* Helt rundade hörn */
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+
+
+
+
+
+
+
+/* Vänster kolumn (Bilden) */
+.service-left {
+    flex: 1; /* Tar upp hälften av bredden */
+}
+
+/* Höger kolumn (Formuläret) */
+.cs-form-container {
+    margin-top: 8rem;
+    display: flex;
+   
+    flex-direction: column; /* Staplar rubrik, text och formulär på höjden */
+    justify-content: center; /* Drar ner allt innehåll till mitten av den vita ytan */
+    flex: 1; /* Tar upp den andra hälften */
+    background-color: #fff; /* Vit bakgrund för formulärdelen */
+    padding: 40px 40px;
+  
+}
+
