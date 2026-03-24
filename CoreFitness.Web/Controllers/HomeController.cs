@@ -1,6 +1,9 @@
 using CoreFitness.Web.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+
+
 
 namespace CoreFitness.Web.Controllers
 {
@@ -16,8 +19,41 @@ namespace CoreFitness.Web.Controllers
             return View();
         }
 
+        private readonly SignInManager<IdentityUser> _signInManager;
+
+        // 2. Skapa en konstruktor som hämtar in SignInManager
+        public HomeController(SignInManager<IdentityUser> signInManager)
+        {
+            _signInManager = signInManager;
+        }
+
+
         public IActionResult CustomerService()
             {
+            return View();
+        }
+
+        public IActionResult Account()
+        {
+            return View();
+        }
+
+        public IActionResult NotFound()
+        {
+            return View();
+        }
+
+
+
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync(); // Detta tar bort inloggningen
+            return RedirectToAction("Index", "Home"); // Skickar tillbaka användaren till startsidan
+        }
+
+        public IActionResult Padel()
+        {
             return View();
         }
 

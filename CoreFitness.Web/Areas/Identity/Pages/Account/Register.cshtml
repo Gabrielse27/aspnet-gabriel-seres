@@ -1,0 +1,83 @@
+﻿@page
+@model CoreFitness.Web.Areas.Identity.Pages.Account.RegisterModel
+
+@{
+    ViewData["Title"] = "Become a Member";
+    ViewData["HideFooter"] = true;
+
+}
+
+
+
+
+
+
+<section class="signup-section">
+    <div class="signup-card">
+        <h1>Become A Member</h1>
+        <p class="signup-text" style="text-align: left;">Sign up to continue your fitness journey with full access to your customized a god program, training history, and progress tracking. Stay consistent, monitor your development, and keep moving forward with the structure and support built into your account.</p>
+
+        <div class="social-login">
+            <a href="#" class="social-btn"><img src="~/images/google-sign.in-welcome.svg" alt="Google" /></a>
+            <a href="#" class="social-btn"><img src="~/images/facebook-sign.in-welcome.svg" alt="Facebook" /></a>
+            <a href="#" class="social-btn"><img src="~/images/github-sign.in-welcome.svg" alt="GitHub" /></a>
+        </div>
+
+        <div class="divider">
+            <span>OR CONTINUE WITH</span>
+        </div>
+
+        <form id="account" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+            <div class="form-group">
+                <label asp-for="Input.Email">Email Address *</label>
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Enter Email Address" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+
+            <button id="login-submit" type="submit" class="btn-continue">
+                Continue
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+            <div class="terms-check" style="margin-top: 20px; font-size: 12px; color: #666;">
+                
+                <label asp-for="Input.RememberMe">We will send a verification code to your email</label>
+            </div>
+
+
+            </form>
+
+            </div>
+            </section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+
+
+
+
+
+<style>
+    footer {
+        display: none !important;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+

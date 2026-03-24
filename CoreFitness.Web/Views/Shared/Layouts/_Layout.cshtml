@@ -1,21 +1,34 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CoreFitness.Web</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script type="importmap"></script>
 
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/output.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/CoreFitness.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/css/output.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/CoreFitness.Web.styles.css" asp-append-version="true" />
 </head>
+
+
+
+
 
 <body>
     <header>
-        <nav
-            style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color: var(--bg-dark); border-bottom: 1px solid #333;">
+
+       
+        <nav style="display: flex; justify-content: space-between; align-items: center; border-radius: 20px; padding: 20px 50px; background-color: var(--bg-dark); border-bottom: 1px solid #333; ">
+            
 
             <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
                 <img src="~/images/logo.svg" alt="CoreFitness Logo" style="height: 40px; width: auto;" />
@@ -24,28 +37,55 @@
             </div>
 
 
-
-
-
-
             <ul style="display: flex; list-style: none; gap: 30px; margin: 0; padding: 0;">
-                <li><a asp-controller="Home" asp-action="Index" style="color: white; text-decoration: none;">Home</a></li>
-                <li><a asp-controller="Home" asp-action="Memberships" style="color: white; text-decoration: none;">Memberships</a></li>
-                <li><a asp-controller="Home" asp-action="CustomerService" style="color: white; text-decoration: none;">Customer Service</a>"</li>
-                <li><a href="/" style="color: white; text-decoration: none;">Fitness Centers</a></li>
-                <li><a href="#" style="color: white; text-decoration: none;">Training</a></li>
-                    <li><a href="#" style="color: white; text-decoration: none;">Store</a></li>
+                <li><a class="nav-link" asp-controller="Home" asp-action="Index" >Fitness Centers</a></li>
+                <li><a class="nav-link" asp-controller="Home" asp-action="Memberships" >Memberships</a></li>
+
+
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#">
+                        Training<i class="fa-solid fa-chevron-down"></i>
+                  </a>
+                  <ul class="custom-dropdown-menu">
+
+                        <ul class="custom-dropdown-menu">
+                            <li><a class="dropdown-item" asp-controller="Home" asp-action="PersonalTraining">Personal Training</a></li>
+                            <li><a class="dropdown-item" asp-controller="Home" asp-action="GroupTraining">Group Training</a></li>
+                            <li><a class="dropdown-item" asp-controller="Home" asp-action="Padel">Padel</a></li>
+
+                       </ul>
+                  </ul>
+
+              </li> 
+
+
+                <li><a class="nav-link"asp-controller="Home" asp-action="CustomerService">Customer Service</a></li>
+            
+              
+                    <li><a class="nav-link"asp-controller="Home" asp-action="Store" >Store</a></li>
                 </ul>
 
                 <div style="display: flex; align-items: center; gap: 20px;">
-                    <a href="/Identity/Account/Login" style="color: white; text-decoration: none,;">Become Member</a>
+                    <a href="/Identity/Account/Register" style="color: white; text-decoration: none,;">Become Member</a>
 
 
-                    <a href="#" class="btn-gym">Sign In
-                        <img src="/images/arrow-right.svg" alt="arrow-right" style="height: 18px; width: auto;" margin-top:
-                             1rem" />
-                    </a>
+                    
                 </div>
+
+
+            <div class="ms-auto">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <a asp-controller="Home" asp-action="Account" class="btn-gym">My Account <i class="fa-solid fa-chevron-right"></i></a>
+                }
+                else
+                {
+                    <a href="/Identity/Account/Login" class="btn-gym">Sign In <i class="fa-solid fa-chevron-right"></i></a>
+                }
+            </div>
+
+
+
             </nav>
         </header>
         <main role="main">
@@ -55,6 +95,8 @@
 
 
 
+
+  
 
     <section class="footer-sectionen">
         <footer class="main-footer">
