@@ -37,7 +37,7 @@ if (!app.Environment.IsDevelopment())
     {
         app.UseExceptionHandler("/Home/Error");
     }
-    app.UseStatusCodePagesWithReExecute("/Home/NotFound", "?statusCode={0}");
+    app.UseStatusCodePagesWithReExecute("/Identity/Account/NotFound");
     app.UseHsts();
 }
 

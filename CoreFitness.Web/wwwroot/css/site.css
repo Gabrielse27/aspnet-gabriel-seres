@@ -13,7 +13,6 @@
 
 
 body {
-    background-color: var(--bg-dark);
     color: var(--text-black);
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
@@ -67,23 +66,31 @@ body {
 
 .hero-container {
     padding-top: 10rem;
-    background-color: var(--bg-dark);
+   background-color: black;
     background-image: url('/images/right-column.svg');
     background-repeat: no-repeat;
     background-position: right center; /* Placerar paret till höger */
     background-size: contain; /* Gör att hela paret syns utan att beskäras för mycket */
     height: 90vh;
+    margin-top: 0;
     display: flex;
     align-items: center;
     padding-left: 10%;
     background-position: 80% center;
     padding-bottom: 10rem;
-   
 }
-
+    
 .hero-content{
     margin-left: 5rem;
 
+}
+.main-navbar {
+    border-radius: 20px;
+    
+}
+.home-page .main-navbar {
+    border-radius: 0;
+    
 }
 
 

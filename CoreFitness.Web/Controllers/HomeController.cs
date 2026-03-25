@@ -38,14 +38,7 @@ namespace CoreFitness.Web.Controllers
             return View();
         }
 
-        public IActionResult NotFound()
-        {
-            return View();
-        }
-
-
-
-
+        
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync(); // Detta tar bort inloggningen
