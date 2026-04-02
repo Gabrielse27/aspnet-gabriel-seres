@@ -1,6 +1,7 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-
+﻿@using Infrastructure.Identity
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 
 
@@ -13,7 +14,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script type="importmap"></script>
+  
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="/css/output.css" asp-append-version="true" />
     <link rel="stylesheet" href="/CoreFitness.Web.styles.css" asp-append-version="true" />
@@ -21,76 +24,32 @@
 
 
 
-
-
 <body class="@ViewData["BodyClass"]">
-    <header>
-
-       
-        <nav class ="main-navbar" style="display: flex; justify-content: space-between; align-items: center;
- padding: 20px 50px; background-color: var(--bg-dark); border-bottom: 1px solid #333; ">
-            
-
-            <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
-                <img src="~/images/logo.svg" alt="CoreFitness Logo" style="height: 40px; width: auto;" />
-
-
-            </div>
-
-
-            <ul style="display: flex; list-style: none; gap: 30px; margin: 0; padding: 0;">
-                <li><a class="nav-link" asp-controller="Home" asp-action="Index" >Fitness Centers</a></li>
-                <li><a class="nav-link" asp-controller="Home" asp-action="Memberships" >Memberships</a></li>
-
-
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#">
-                        Training<i class="fa-solid fa-chevron-down"></i>
-                  </a>
-                  <ul class="custom-dropdown-menu">
-
-                        <ul class="custom-dropdown-menu">
-                            <li><a class="dropdown-item" asp-controller="Home" asp-action="PersonalTraining">Personal Training</a></li>
-                            <li><a class="dropdown-item" asp-controller="Home" asp-action="GroupTraining">Group Training</a></li>
-                            <li><a class="dropdown-item" asp-controller="Home" asp-action="Padel">Padel</a></li>
-
-                       </ul>
-                  </ul>
-
-              </li> 
-
-
-                <li><a class="nav-link"asp-controller="Home" asp-action="CustomerService">Customer Service</a></li>
-            
-              
-                    <li><a class="nav-link"asp-controller="Home" asp-action="Store" >Store</a></li>
-                </ul>
-
-                <div style="display: flex; align-items: center; gap: 20px;">
-                    <a href="/Identity/Account/Register" style="color: white; text-decoration: none,;">Become Member</a>
-
-
-                    
-                </div>
-
-
-            <div class="ms-auto">
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <a asp-controller="Home" asp-action="Account" class="btn-gym">My Account <i class="fa-solid fa-chevron-right"></i></a>
-                }
-                else
-                {
-                    <a href="/Identity/Account/Login" class="btn-gym">Sign In <i class="fa-solid fa-chevron-right" style="transform: translateY(1.2px)"></i></a>
-                }
-            </div>
 
 
 
-            </nav>
+    <div class="app-layout">
+
+        <header>
+
+            @* Här anropas din Header-partial från din Shared/Partials-mapp *@
+            <partial name="Partials/_HeaderSection" />
+
+            @if (IsSectionDefined("Hero"))
+            {
+                @await RenderSectionAsync("Hero")
+            }
+
         </header>
+        </div>
+
+
+
+
         <main role="main">
+            
             @RenderBody()
+       
         </main>
 
 
@@ -151,22 +110,10 @@
 
 
 
-
-
-
-
-
-
-
         <script src="~/js/site.js" asp-append-version="true"></script>
         @await RenderSectionAsync("Scripts", required: false)
 
-        
-
-
-
-
-
+       
 
     </body>
 

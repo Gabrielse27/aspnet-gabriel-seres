@@ -4,6 +4,10 @@
     --gym-lime: #D6EB31; /* Din limegröna färg från skissen */
     --text-white: #FFFFFF;
     --text-gray: #B0B0B0;
+    --error-text-color: #e31616;
+    --error-background-color: #d9534f;
+    --font-fa: "Font Awesome 6 Free";
+    --font-regular: 900;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -17,6 +21,15 @@ body {
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     
+}
+
+.nav-link-classes {
+    color: white;
+    text-decoration: none;
+    margin-right: 25px; /* Skapar mellanrummet till My Account-knappen */
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.2s;
 }
 
 /* Den limegröna knappen */
@@ -1270,7 +1283,7 @@ header ul li a.nav-link {
 
 .my-account-section {
     background-color: #F8F9FA;
-    min-height: 105vh; /* Gör att sektionen alltid är minst lika hög som skärmen */
+    min-height: 60vh; /* Gör att sektionen alltid är minst lika hög som skärmen */
     padding: 50px 0;
     display: flex;
     flex-direction: column; /* Staplar rubrik och container på varandra */
@@ -1289,7 +1302,7 @@ header ul li a.nav-link {
     display: flex;
     gap: 60px;
     max-width: 1200px;
-    min-height: 105vh;
+    min-height: 60vh;
     margin: auto;
     padding: 0 20px;
     width: 60%;
@@ -1338,30 +1351,34 @@ header ul li a.nav-link {
 
 /* Main Content styling */
 .account-main {
-    margin-top: 8rem;
+    margin-top: 5rem;
     flex: 1;
     background: white;
-    padding: 20px 40px 40px 40px;
+    padding: 20px 20px 2px 20px;
     border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    height: fit-content;
 }
 
     .account-main h1 {
         font-family: 'Poppins', sans-serif;
         font-size: 56px;
         font-weight: 600; /* 500 motsvarar Medium */
-        margin-bottom: 50px;
+        margin-bottom: 20px;
         border-bottom: 1px solid #E6E6E6;
     }
 
+.account-sidebar {
+    margin-top: 5rem;
+}
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
     .form-group label {
         display: block;
         font-weight: bold;
-        margin-bottom: 8px;
+        
         font-size: 14px;
     }
 
@@ -1375,7 +1392,7 @@ header ul li a.nav-link {
 .border-bottom {
     border-bottom: 1px solid #E6E6E6; /* Den grå linjen */
     padding-bottom: 30px; /* Avstånd ner till linjen */
-    margin-bottom: 30px; /* Avstånd från linjen till nästa rubrik */
+    margin-bottom: 10px; /* Avstånd från linjen till nästa rubrik */
 }
 
     
@@ -1387,6 +1404,7 @@ header ul li a.nav-link {
     font-weight: bold;
     cursor: pointer;
     float: right;
+    margin-bottom: 50px;
     
 }
     .btn-save:hover {
@@ -1395,7 +1413,7 @@ header ul li a.nav-link {
 
 .btn-remove {
     color: red;
-    text-decoration: none;
+    cursor: pointer;
     font-weight: bold;
     display: block;
     margin-top: 5px;
@@ -1410,8 +1428,6 @@ header ul li a.nav-link {
 
 .uppload-container {
     position: relative;
-  
-    width: 100%;
     /* Detta "fångar" knappen inuti boxen */
 }
 
@@ -1428,11 +1444,11 @@ header ul li a.nav-link {
    position: absolute;
     background: #D3D3D3; /* Grå färg enligt Figma */
     border: none;
-    padding: 10px 30px;
+    padding: 8px 28px;
     border-radius: 12px;
     cursor: pointer;
     font-size: 14px;
-    margin-right: 0.5rem;
+    margin-right: 5px;
     margin-top: 5px;
     font-size: 16px;
     font-weight: 600;
@@ -1442,11 +1458,13 @@ header ul li a.nav-link {
         background: #bdbdbd;
     }
 .button-browser {
-   display: flex;
-   justify-content: flex-end;
-   margin-bottom: 5rem;
-   
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem;
+    width: 148%;
 }
+
+
 
 .statistics-section {
     background-color: #F8F9FA;
@@ -1825,6 +1843,65 @@ header ul li a.nav-link {
     width: 100%;
     margin-bottom: 20px;
 }
+
+.container .logo-item {
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 1rem;
+    margin-inline: auto;
+
+    @media (width >= 768px) {
+        max-width: 720px;
+    }
+
+    @media (width >= 1200px) {
+        max-width: 1140px;
+    }
+
+    @media (width >= 1400px) {
+        max-width: 1320px;
+    }
+}
+
+form .field-validation-error {
+    position: relative;
+    z-index: 1;
+    top: 4px;
+    right: 0.2rem;
+    font-size: 0.8em;
+   color: #FFFFFF;
+    background-color: #f02d2d;
+    border-radius: 14px;
+    padding: 0.4rem 1rem;
+    text-align: right;
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+}
+    form .field-validation-error::before {
+        content: '\f071';
+        font-family: var(--font-fa);
+        font-size: 1.1em;
+        font-weight: var(--font-regular);
+        margin-right: 3px;
+    }
+
+
+.input-validation-error {
+    border: 2px solid red !important;
+}
+
+.field-validation-error {
+   
+    display: block !important;
+}
+
+
+
+
+
+
+
 
 
 

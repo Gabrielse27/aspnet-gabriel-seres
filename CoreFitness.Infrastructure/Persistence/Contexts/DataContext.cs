@@ -1,7 +1,4 @@
 ﻿
-
-
-
 using CoreFitness.Infrastructure.Persistence.Entities.Members;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -13,6 +10,8 @@ namespace CoreFitness.Infrastructure.Persistence.Contexts
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly); 
         } 
         public DbSet<MemberEntity> Members => Set<MemberEntity>();

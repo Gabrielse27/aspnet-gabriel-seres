@@ -1,4 +1,5 @@
 using CoreFitness.Web.Models;
+using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -19,10 +20,10 @@ namespace CoreFitness.Web.Controllers
             return View();
         }
 
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         // 2. Skapa en konstruktor som hämtar in SignInManager
-        public HomeController(SignInManager<IdentityUser> signInManager)
+        public HomeController(SignInManager<ApplicationUser> signInManager)
         {
             _signInManager = signInManager;
         }

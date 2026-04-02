@@ -1,21 +1,31 @@
+using Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+
+
 
 namespace CoreFitness.Web.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
+
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        // 2. Skapa konstruktorn (Hämtar in verktyget från systemet)
+        public RegisterModel(UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
+        }
+
+
         // Denna behövs för @Model.ReturnUrl
         public string ReturnUrl { get; set; }
 
         // Denna behövs för asp-for="Input.Email"
         [BindProperty]
         public InputModel Input { get; set; }
-
-       
-
         public class InputModel
         {
             [Required]
@@ -23,12 +33,11 @@ namespace CoreFitness.Web.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
-
 
             [Display(Name = "Accept user terms and conditions")]
             public bool RememberMe { get; set; }
@@ -42,12 +51,14 @@ namespace CoreFitness.Web.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
 
-                returnUrl ??= Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
 
             // Den här raden skickar iväg användaren till nästa sida direkt
             return RedirectToPage("SetPassword", new { email = Input.Email });
-            
-           
+
+
         }
+
+
     }
 }

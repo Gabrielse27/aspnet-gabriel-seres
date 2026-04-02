@@ -7,6 +7,16 @@ public class ApplicationUser : IdentityUser
 {
     public MemberEntity? Member { get; set; }
 
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+
+    public string? ProfilePicture { get; set; }
+    public override string?  PhoneNumber { get; set; }
+
+
+
+
+
     public static ApplicationUser Create(string email, bool confirmed = true)
     {
         if (string.IsNullOrWhiteSpace(email))
@@ -16,7 +26,8 @@ public class ApplicationUser : IdentityUser
         {
             UserName = email,
             Email = email,
-            EmailConfirmed = confirmed
+            EmailConfirmed = confirmed,
+            
         };
 
         return user;

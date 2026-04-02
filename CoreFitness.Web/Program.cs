@@ -1,22 +1,21 @@
 using CoreFitness.Application;
 using CoreFitness.Application.Interfaces;
-using CoreFitness.Infrastructure.Data;
+using CoreFitness.Infrastructure.Persistence.Contexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.UI;
+using Infrastructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Registrerar Identity-systemet så att SignInManager kan användas
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddEntityFrameworkStores<ApplicationDbContext>(); // Se till att namnet på din DbContext stämmer
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<DataContext>(); // Se till att namnet på din DbContext stämmer
 
 // 1. Koppla mot databasen med Connection String från appsettings.json
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(connectionString));
-
-
 
 
 // 2. Registrera din GymService för Dependency Injection (Krav för arkitekturen)
@@ -44,6 +43,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles(); // Viktigt för att dina bilder i wwwroot ska synas
 app.UseRouting();
+app.UseAuthentication();    
 app.UseAuthorization();
 
 app.MapControllerRoute(
