@@ -36,7 +36,7 @@ namespace CoreFitness.Web.Controllers
                 LastName = user.LastName,   
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
-                ProfileImageUrl = user.ProfilePicture != null ? "/images/" + user.ProfilePicture : "/images/default.png"
+                ProfileImageUrl = user.ProfilePicture != null ? "/images/" + user.ProfilePicture : "/images/photo-profile-myaccount.svg"
 
              
             };
@@ -48,7 +48,13 @@ namespace CoreFitness.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(AccountDetailsViewModel model)
         {
-            
+
+            if (!ModelState.IsValid)
+            {
+                // Om valideringen misslyckas, skicka tillbaka användaren till vyn direkt
+                // utan att spara något i databasen. Felmeddelandena visas nu i din HTML.
+                return View(model);
+            }
 
 
             // 1. Hämta den inloggade användaren från databasen
