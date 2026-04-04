@@ -15,6 +15,7 @@ namespace CoreFitness.Domain.Entities
 
         public string firstName { get; set; }
         public string lastName { get; set; }
+         public int Age { get; set; }
     }
 }
 
