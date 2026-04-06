@@ -1,4 +1,5 @@
 ﻿
+using CoreFitness.Domain.Entities;
 using CoreFitness.Infrastructure.Persistence.Entities.Members;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -15,6 +16,8 @@ namespace CoreFitness.Infrastructure.Persistence.Contexts
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly); 
         } 
         public DbSet<MemberEntity> Members => Set<MemberEntity>();
+        public DbSet<ContactRequestEntity> ContactRequests => Set<ContactRequestEntity>();
 
+        public DbSet<ContactRequestEntity> Messages { get; set; }
     }
 }

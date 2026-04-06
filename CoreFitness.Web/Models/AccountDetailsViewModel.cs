@@ -18,6 +18,14 @@ namespace CoreFitness.Web.Models
         [EmailAddress(ErrorMessage = "Ogiltig e-postadress")]
         public string? Email { get; set; }
 
+
+        [Required(ErrorMessage = "Message måste fyllas i")]
+        [MinLength(5, ErrorMessage = "Meddelandet måste vara minst 5 tecken")]
+        [Display(Name = "Message")]
+        public string Message { get; set; } = null!;
+
+
+
         [Phone(ErrorMessage = "Ogiltigt telefonnummer")]
         public string? PhoneNumber { get; set; }
 

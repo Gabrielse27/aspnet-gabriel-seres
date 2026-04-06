@@ -1,8 +1,11 @@
-﻿using Infrastructure.Identity;
+﻿using CoreFitness.Domain.Entities;
+using CoreFitness.Infrastructure.Persistence.Contexts;
+using CoreFitness.Web.Models;
+using Infrastructure.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using CoreFitness.Web.Models;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoreFitness.Web.Controllers
 {
@@ -15,12 +18,14 @@ namespace CoreFitness.Web.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
 
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly DataContext _context;
 
         // 2. Ta emot den i constructorn
-        public AccountController (UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController (UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, DataContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
 
@@ -123,8 +128,41 @@ namespace CoreFitness.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Contact(AccountDetailsViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // 1. Skapa ett objekt som ska sparas i databasen
+                // (Antingen har du en tabell som heter ContactRequest eller Messages)
+                var contactRequest = new ContactRequestEntity
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    Message = model.Message,
+                    CreatedDate = DateTime.Now // Bra att ha för att veta när det skickades
+                };
+
+                // 2. Lägg till i databas-contextet
+                _context.Messages.Add(contactRequest);
+
+                // 3. Spara ändringarna till databasen på riktigt
+                await _context.SaveChangesAsync();
+
+                // Skicka användaren vidare till en tack-sida eller startsidan
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View("~/Views/Home/CustomerService.cshtml", model);
+        }
+
+
 
     }
+
+
 
 }
 

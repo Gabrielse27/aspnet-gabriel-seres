@@ -1,4 +1,5 @@
-﻿
+﻿@model AccountDetailsViewModel
+
 <section class="customer-service-section">
     <h2 class="customerservice-main-title">Customer Service</h2>
 
@@ -46,32 +47,43 @@
             <h2 class="cs-form-title">Contact Us Today</h2>
             <p class="cs-form-text">Ready to begin your fitness journey? Contact GymPro today and let our expert trainers guide you with the right program and support.</p>
 
-            <form class="cs-actual-form">
+            <form asp-action="Contact" asp-controller="Account" method="post" class="cs-actual-form">
                 <div class="cs-form-row">
                     <div class="cs-input-group">
                         <label>First Name *</label>
-                        <input type="text" placeholder="Enter First Name">
+                        <input asp-for = "FirstName" type="text" placeholder="Enter First Name" />
+                        <span asp-validation-for="FirstName" class="text-danger" style="text-align: left; display: block; padding-left: 10px;" ></span>
                     </div>
+
+
                     <div class="cs-input-group">
                         <label>Last Name *</label>
-                        <input type="text" placeholder="Enter Last Name">
+                        <input asp-for= "LastName" type="text" placeholder="Enter Last Name" />
+                        <span asp-validation-for="LastName" class="text-danger" style="text-align: left; display: block; padding-left: 10px;"></span>
                     </div>
                 </div>
 
                 <div class="cs-form-row">
                     <div class="cs-input-group">
                         <label>Email Address *</label>
-                        <input type="email" placeholder="Enter Email Address">
+                        <input asp-for="Email" type="email" placeholder="Enter Email Address" />
+                        <span asp-validation-for="Email" class="text-danger" style="text-align: left; display: block; padding-left: 10px;"></span>
                     </div>
+
                     <div class="cs-input-group">
-                        <label>Phone Number</label>
-                        <input type="text" placeholder="Enter Phone Number">
-                    </div>
+                        <label asp-for="PhoneNumber">Phone Number</label>
+                        <input asp-for="PhoneNumber" type="text" placeholder="Enter Phone Number">
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                   </div>
                 </div>
 
                 <div class="cs-input-group full-width">
                     <label>Message *</label>
-                    <textarea placeholder="Message..."></textarea>
+
+                    <textarea asp-for="Message" placeholder="Message"></textarea>
+                    
+
+                    <span asp-validation-for ="Message" class="text-danger" style="text-align: left; display: block; padding-left: 10px;"></span>
                 </div>
 
                 <button type="submit" class="cs-submit-btn">

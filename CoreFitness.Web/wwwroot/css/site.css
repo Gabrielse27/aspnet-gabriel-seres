@@ -1889,14 +1889,17 @@ form .field-validation-error {
 
 .input-validation-error {
     border: 2px solid red !important;
+    color: red;
 }
 
 .field-validation-error {
-   
+    color: red;
     display: block !important;
 }
 
-
+textarea.input-validation-error {
+    border: 2px solid red !important;
+}
 
 
 
