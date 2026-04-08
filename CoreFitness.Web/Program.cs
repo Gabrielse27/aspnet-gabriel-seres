@@ -4,12 +4,13 @@ using CoreFitness.Infrastructure.Persistence.Contexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.UI;
-using Infrastructure.Identity;
+using CoreFitness.Domain.Identity;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Registrerar Identity-systemet så att SignInManager kan användas
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<DataContext>(); // Se till att namnet på din DbContext stämmer
 
 // 1. Koppla mot databasen med Connection String från appsettings.json

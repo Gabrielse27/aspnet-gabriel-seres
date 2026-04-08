@@ -28,7 +28,6 @@
   <ItemGroup>
     <Folder Include="Models\Authentication\" />
     <Folder Include="Models\Account\" />
-    <Folder Include="wwwroot\NewFolder\" />
   </ItemGroup>
 
 </Project>

@@ -14,22 +14,21 @@ namespace CoreFitness.Web.Models
         [Display(Name = "Last Name")]
         public string? LastName { get; set; }
 
+
+
         [Required(ErrorMessage = "E-postadress måste fyllas i")]
         [EmailAddress(ErrorMessage = "Ogiltig e-postadress")]
         public string? Email { get; set; }
 
-
-        [Required(ErrorMessage = "Message måste fyllas i")]
-        [MinLength(5, ErrorMessage = "Meddelandet måste vara minst 5 tecken")]
         [Display(Name = "Message")]
-        public string Message { get; set; } = null!;
+        [Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidateNever]
+        public string Message { get; set; }
+
 
 
 
         [Phone(ErrorMessage = "Ogiltigt telefonnummer")]
         public string? PhoneNumber { get; set; }
-
-
 
         // Denna används för att visa bilden på sidan
         public string? ProfileImageUrl { get; set; }

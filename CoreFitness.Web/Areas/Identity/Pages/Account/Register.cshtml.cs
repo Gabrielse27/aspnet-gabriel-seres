@@ -1,4 +1,5 @@
-using Infrastructure.Identity;
+
+using CoreFitness.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,10 +12,10 @@ namespace CoreFitness.Web.Areas.Identity.Pages.Account
     public class RegisterModel : PageModel
     {
 
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<User> _userManager;
 
         // 2. Skapa konstruktorn (Hämtar in verktyget från systemet)
-        public RegisterModel(UserManager<ApplicationUser> userManager)
+        public RegisterModel(UserManager<User> userManager)
         {
             _userManager = userManager;
         }

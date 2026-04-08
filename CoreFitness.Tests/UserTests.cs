@@ -3,6 +3,7 @@ using CoreFitness.Domain;
 using CoreFitness.Domain.Entities;
 using Assert = Xunit.Assert;
 using Microsoft.AspNetCore.Identity;
+using CoreFitness.Domain.Identity;
 
 
 namespace CoreFitness.Tests
@@ -15,11 +16,11 @@ namespace CoreFitness.Tests
         public void CreateUser_ShouldCreateUserWithValidProperties()
         {
             // Arrange -Förberedd data
-            var user = new User { firstName = "Gabriel Ser", Email = "gabriel@test.com" };
+            var user = new User { FirstName = "Gabriel Ser", Email = "gabriel@test.com" };
             // Act
 
             // Assert
-            Assert.Equal("Gabriel Ser", user.firstName);
+            Assert.Equal("Gabriel Ser", user.FirstName);
             Assert.Equal("gabriel@test.com", user.Email);
         }
         [TestMethod]
@@ -34,7 +35,7 @@ namespace CoreFitness.Tests
         [TestMethod]
         public void UserAge_ShouldBeValidIfOverEighteen()
         {
-            var user = new User { firstName = "Gabriel", Age = 25 };
+            var user = new User { FirstName = "Gabriel", Age = 25 };
             int age = user.Age;
 
             bool isAdult = age >= 18;

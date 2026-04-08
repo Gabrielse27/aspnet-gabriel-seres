@@ -1,5 +1,10 @@
 ﻿@model AccountDetailsViewModel
 
+@{
+    ViewData["Title"] = "My Account";
+}
+
+
 <section class="my-account-section">
 
     <h1 class="myaccount-title">My Account</h1>
@@ -102,3 +107,28 @@
 
     </div>
 </section>
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScripts" />
+
+
+
+    <script>
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    // Denna rad letar efter id:t vi skapade ovan
+                    var image = document.getElementById('profileImagePreview');
+                    if (image) {
+                        image.src = e.target.result;
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    }

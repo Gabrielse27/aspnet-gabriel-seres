@@ -22,6 +22,13 @@ namespace CoreFitness.Web.Models
 
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Phone Number", Prompt = "Enter phone number")]
-        public string? PhoneNumber { get; set; } 
+        public string? PhoneNumber { get; set; }
+
+
+        [Display(Name = "Message", Prompt = "Write your message here")]
+        [Required(ErrorMessage = "Message måste fyllas i")]
+        [MinLength(5, ErrorMessage = "Meddelandet måste vara minst 5 tecken")]
+        public string Message { get; set; } = null!;
+
     }
 }

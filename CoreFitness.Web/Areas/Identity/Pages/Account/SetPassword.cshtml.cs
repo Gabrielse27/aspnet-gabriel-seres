@@ -1,4 +1,5 @@
-using Infrastructure.Identity;
+
+using CoreFitness.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,11 +14,11 @@ namespace CoreFitness.Web.Areas.Identity.Pages.Account
     {
 
 
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
         // 2. Skapa konstruktorn (Denna hämtar in verktygen från systemet)
-        public SetPasswordModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public SetPasswordModel(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -59,7 +60,7 @@ namespace CoreFitness.Web.Areas.Identity.Pages.Account
             if (user == null)
             {
                 // 2. Om användaren INTE finns i AspNetUsers, skapa den nu!
-                user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                user = new User { UserName = Input.Email, Email = Input.Email };
                 var createResult = await _userManager.CreateAsync(user);
 
                 if (!createResult.Succeeded)

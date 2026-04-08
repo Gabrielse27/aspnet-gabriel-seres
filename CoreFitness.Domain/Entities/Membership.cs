@@ -10,7 +10,5 @@ namespace CoreFitness.Domain.Entities
         public string Type { get; set; } = string.Empty; // Ex: Standard,Premium,VIP
         public decimal Price { get; set; }
         public string Description { get; set; } = string.Empty;
-
-
     }
 }

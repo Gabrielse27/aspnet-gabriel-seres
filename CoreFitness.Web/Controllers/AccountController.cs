@@ -1,7 +1,7 @@
 ﻿using CoreFitness.Domain.Entities;
+using CoreFitness.Domain.Identity;
 using CoreFitness.Infrastructure.Persistence.Contexts;
 using CoreFitness.Web.Models;
-using Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,13 +15,13 @@ namespace CoreFitness.Web.Controllers
     {
 
         // 1. Skapa en privat variabel
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<User> _userManager;
 
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly DataContext _context;
 
         // 2. Ta emot den i constructorn
-        public AccountController (UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, DataContext context)
+        public AccountController (UserManager<User> userManager, SignInManager<User> signInManager, DataContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -33,20 +33,23 @@ namespace CoreFitness.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
+            if (user == null) return NotFound();
 
-            // Vi skapar modellen med infon vi ser i din databasbild
-            var model = new AccountDetailsViewModel
+            var viewModel = new AccountDetailsViewModel
             {
-                FirstName = user.FirstName, // Här hämtas från SQL
-                LastName = user.LastName,   
+                FirstName = user.FirstName,
+                LastName = user.LastName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
-                ProfileImageUrl = user.ProfilePicture != null ? "/images/" + user.ProfilePicture : "/images/photo-profile-myaccount.svg"
 
-             
+                // HÄR ÄR FIXEN:
+                // Om user.ProfileImage har ett värde i databasen, använd det.
+                ProfileImageUrl = !string.IsNullOrEmpty(user.ProfileImage)
+                    ? "/images/" + user.ProfileImage
+                    : "/images/photo-profile-myaccount.svg"
             };
 
-            return View(model);
+            return View(viewModel);
         }
 
 
@@ -84,7 +87,9 @@ namespace CoreFitness.Web.Controllers
                 }
 
                 // Uppdatera användarobjektet med det nya filnamnet
-                user.ProfilePicture = fileName;
+                user.ProfileImage = fileName;
+
+                model.ProfileImageUrl = "/images/" + fileName;
             }
 
             // 3. Uppdatera textfälten från formuläret
@@ -129,7 +134,7 @@ namespace CoreFitness.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Contact(AccountDetailsViewModel model)
+        public async Task<IActionResult> Contact(CreateClientFormModel model)
         {
             if (ModelState.IsValid)
             {
@@ -137,9 +142,9 @@ namespace CoreFitness.Web.Controllers
                 // (Antingen har du en tabell som heter ContactRequest eller Messages)
                 var contactRequest = new ContactRequestEntity
                 {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    Email = model.Email,
+                    FirstName = model.FirstName!,
+                    LastName = model.LastName!,
+                    Email = model.Email!,
                     PhoneNumber = model.PhoneNumber,
                     Message = model.Message,
                     CreatedDate = DateTime.Now // Bra att ha för att veta när det skickades
@@ -157,6 +162,8 @@ namespace CoreFitness.Web.Controllers
 
             return View("~/Views/Home/CustomerService.cshtml", model);
         }
+
+
 
 
 

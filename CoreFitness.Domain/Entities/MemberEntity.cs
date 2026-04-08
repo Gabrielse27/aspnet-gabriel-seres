@@ -1,7 +1,12 @@
-﻿namespace CoreFitness.Infrastructure.Persistence.Entities.Members
-{
+﻿using System.ComponentModel.DataAnnotations;
+
+
+namespace CoreFitness.Domain.Entities;
+
     public class MemberEntity
     {
+
+        [Key]
         public string Id { get; set; } = null!;
         public string UserId { get; set; } = null!;
 
@@ -19,4 +24,4 @@
 
 
     }
-}
+

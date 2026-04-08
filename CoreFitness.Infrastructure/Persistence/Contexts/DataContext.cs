@@ -1,13 +1,13 @@
 ﻿
 using CoreFitness.Domain.Entities;
-using CoreFitness.Infrastructure.Persistence.Entities.Members;
-using Infrastructure.Identity;
+using CoreFitness.Domain.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace CoreFitness.Infrastructure.Persistence.Contexts
 {
-    public class DataContext(DbContextOptions<DataContext> options) : IdentityDbContext<ApplicationUser>(options)
+    public class DataContext(DbContextOptions<DataContext> options) : IdentityDbContext<User>(options)
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,5 +19,7 @@ namespace CoreFitness.Infrastructure.Persistence.Contexts
         public DbSet<ContactRequestEntity> ContactRequests => Set<ContactRequestEntity>();
 
         public DbSet<ContactRequestEntity> Messages { get; set; }
+         
+        
     }
 }

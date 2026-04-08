@@ -1,21 +1,44 @@
-﻿using System;
+﻿using CoreFitness.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoreFitness.Domain.Entities
-{
-    public class User 
-    {
-        public int Id { get; set; }
-        public string Username { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public string Email { get; set; }
 
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-         public int Age { get; set; }
+
+namespace CoreFitness.Domain.Identity;
+
+public class User : IdentityUser
+{
+    public MemberEntity? Member { get; set; }
+
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+
+    public string? ProfilePicture { get; set; }
+    public override string? PhoneNumber { get; set; }
+
+    public int Age { get; set; }
+
+    public string? ProfileImage { get; set; }
+
+    public static User Create(string email, bool confirmed = true)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+            throw new ArgumentException("Email is required");
+
+        var user = new User
+        {
+            UserName = email,
+            Email = email,
+            EmailConfirmed = confirmed,
+
+        };
+
+        return user;
     }
 }
 

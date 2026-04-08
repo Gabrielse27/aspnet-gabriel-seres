@@ -1,5 +1,11 @@
 ﻿@page
 @model LoginModel
+@using CoreFitness.Domain.Entities
+@using CoreFitness.Domain.Identity
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
 @{
     ViewData["Title"] = "Log in";
 
