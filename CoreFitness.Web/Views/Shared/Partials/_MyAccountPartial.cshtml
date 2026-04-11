@@ -26,8 +26,15 @@
                 <div class="menu-header">Menu Options</div>
                 <nav class="menu-list">
                     <a href="#" class="menu-item active">About Me <i class="fa-solid fa-chevron-right"></i></a>
-                    <a href="#" class="menu-item">My Membership <i class="fa-solid fa-chevron-right"></i></a>
+
+                   <a asp-controller="Account" asp-action="Membership" class="menu-item">
+                       My Membership <i class="fa-solid fa-chevron-right"></i>  
+                   </a>
+
+
                     <a href="#" class="menu-item">My Bookings <i class="fa-solid fa-chevron-right"></i></a>
+
+
 
 
                     <a asp-controller="Home" asp-action="Logout" class="menu-item">

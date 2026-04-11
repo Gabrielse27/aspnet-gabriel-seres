@@ -1,11 +1,15 @@
 using CoreFitness.Application;
 using CoreFitness.Application.Interfaces;
+using CoreFitness.Application.Services;
+using CoreFitness.Domain.Identity;
+using CoreFitness.Domain.Repositoryes.Members;
 using CoreFitness.Infrastructure.Persistence.Contexts;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.UI;
-using CoreFitness.Domain.Identity;
-
+using Microsoft.EntityFrameworkCore;
+using CoreFitness.Infrastructure.Repositories;
+using CoreFitness.Infrastructure.Repositories.Members;
+;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,11 +25,17 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 // 2. Registrera din GymService för Dependency Injection (Krav för arkitekturen)
 builder.Services.AddScoped<IGymService, GymService>();
-
 // 3. Lägg till stöd för MVC (Controllers och Views)
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddRazorPages();
+
+// 1. Registrera Repositoryt (Hjärnan som pratar med databasen)
+builder.Services.AddScoped<IMemberRepository, MemberRepository>();
+
+// 2. Registrera Servicen (Hjärnan som håller i logiken)
+builder.Services.AddScoped<IGymService, GymService>();
+
 
 var app = builder.Build();
 

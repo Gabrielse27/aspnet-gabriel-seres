@@ -1,4 +1,6 @@
-﻿using CoreFitness.Domain.Entities;
+﻿using CoreFitness.Application.Common.Results;
+using CoreFitness.Application.Members.Inputs;
+using CoreFitness.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,7 +21,8 @@ namespace CoreFitness.Application.Interfaces
         Task<bool> CancelBookingAsync(int bookingId, string userId);
 
         // Medlemskap
-        Task<IEnumerable<Membership>> GetAllMembershipsAsync();
+        Task<IEnumerable<Memberships>> GetAllMembershipsAsync();
 
+        Task<Result> JoinMembershipAsync(JoinMembershipInput input);
     }
 }

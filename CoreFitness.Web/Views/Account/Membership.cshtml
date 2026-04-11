@@ -1,0 +1,17 @@
+﻿@model CoreFitness.Domain.Agregates.Members.Member
+
+<div class="container mt-10">
+    <h2>Mitt Medlemskap</h2>
+    <hr />
+    <div class="card shadow-sm" style="width: 35rem;">
+        <div class="card-body">
+            <h5 class="card-title text-success">Aktivt Medlemskap</h5>
+            <p class="card-text">
+                <strong>Användar-ID:</strong> @Model.UserId <br />
+                <strong>Medlemskapstyp:</strong>
+                @(Model.MembershipId == 1 ? "Standard" : "Premium")
+            </p>
+            <p class="text-muted">Tack för att du tränar hos oss!</p>
+        </div>
+    </div>
+</div>

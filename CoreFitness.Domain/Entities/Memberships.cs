@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CoreFitness.Domain.Entities
 {
-    public class Membership
+    public class Memberships
     {
         public int Id { get; set; }
         public string Type { get; set; } = string.Empty; // Ex: Standard,Premium,VIP
