@@ -25,10 +25,14 @@
 
                     </div>
 
+                    <form asp-controller="Account" asp-action="JoinMembership" method="post">
+                        <input type="hidden" name="membershipId" value="1" />
 
-                    <a href="#" class="btn-lime-join">Join Now <i class="arrow-icon-membership"></i></a>
+                        <button type="submit" class="btn-lime-join">
+                            Join Now <i class="arrow-icon-membership"></i>  
+                        </button>
 
-
+                    </form>
 
                     <p class="price-footer">Try Any Membership Fre for 1 Week</p>
                 </div>
@@ -52,7 +56,19 @@
                         <span class="price-amount">595.00</span><span class="price-period">/monthly</span>
                         <p class="price-subtitle">* Monthly 20 Classes</p>
                     </div>
-                    <a href="#" class="btn-lime-join">Join Now <i class="arrow-icon-membership"></i></a>
+
+                    <form asp-controller="Account" asp-action="JoinMembership" method="post">
+                        <input type="hidden" name="membershipId" value="2" />
+
+                        <button type="submit" class="btn-lime-join">
+                            Join Now <i class="arrow-icon-membership"></i>
+                        </button>
+
+                    </form>
+                    
+
+
+
                     <p class="price-footer">Try Any Membership Fre for 1 Week</p>
                 </div>
             </div>

@@ -730,6 +730,7 @@ body {
     text-decoration: none;
     font-size: 14px;
     width: 8rem;
+    cursor: pointer;
 }
 
 .arrow-icon-membership {

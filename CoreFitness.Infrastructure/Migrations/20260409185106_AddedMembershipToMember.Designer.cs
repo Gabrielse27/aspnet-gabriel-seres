@@ -4,6 +4,7 @@ using CoreFitness.Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoreFitness.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20260409185106_AddedMembershipToMember")]
+    partial class AddedMembershipToMember
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +57,7 @@ namespace CoreFitness.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ContactRequestEntity", (string)null);
+                    b.ToTable("ContactRequestEntity");
                 });
 
             modelBuilder.Entity("CoreFitness.Domain.Entities.MemberEntity", b =>
@@ -71,7 +74,7 @@ namespace CoreFitness.Infrastructure.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MembershipId")
+                    b.Property<int?>("MembershipId")
                         .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("ModifieAt")
@@ -92,7 +95,7 @@ namespace CoreFitness.Infrastructure.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Members", (string)null);
+                    b.ToTable("Members");
                 });
 
             modelBuilder.Entity("CoreFitness.Domain.Entities.Memberships", b =>
@@ -116,7 +119,7 @@ namespace CoreFitness.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Memberships", (string)null);
+                    b.ToTable("Memberships");
 
                     b.HasData(
                         new

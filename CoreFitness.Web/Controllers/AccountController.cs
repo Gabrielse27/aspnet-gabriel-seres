@@ -1,6 +1,11 @@
-﻿using CoreFitness.Domain.Entities;
+﻿using CoreFitness.Application.Interfaces;
+using CoreFitness.Application.Members.Inputs;
+using CoreFitness.Application.Services;
+using CoreFitness.Domain.Entities;
 using CoreFitness.Domain.Identity;
+using CoreFitness.Domain.Repositoryes.Members;
 using CoreFitness.Infrastructure.Persistence.Contexts;
+using CoreFitness.Infrastructure.Repositories.Members;
 using CoreFitness.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -19,13 +24,19 @@ namespace CoreFitness.Web.Controllers
 
         private readonly SignInManager<User> _signInManager;
         private readonly DataContext _context;
-
+        private readonly IGymService _gymService;
+        private readonly IMemberRepository _memberRepository;
+       
         // 2. Ta emot den i constructorn
-        public AccountController (UserManager<User> userManager, SignInManager<User> signInManager, DataContext context)
+        public AccountController (UserManager<User> userManager, SignInManager<User> signInManager, DataContext context,
+            IGymService gymService, 
+            IMemberRepository memberRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+            _gymService = gymService;
+            _memberRepository = memberRepository;   
         }
 
 
@@ -164,9 +175,46 @@ namespace CoreFitness.Web.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> JoinMembership(int membershipId)
+        {
+            // Hämta inloggad användare
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return Unauthorized();
 
+            // Skapa "paketet" till din tjänst
+            var input = new JoinMembershipInput
+            {
+                UserId = user.Id,
+                MembershipId = membershipId
+            };
 
+            // Anropa din snygga VG-logik!
+            var result = await _gymService.JoinMembershipAsync(input);
 
+            if (result.IsSuccess)
+            {
+                TempData["StatusMessage"] = "Välkommen som medlem!";
+                return RedirectToAction("Index"); // Skicka till "Mina sidor"
+            }
+
+            TempData["ErrorMessage"] = result.Error;
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Membership()
+        {
+            var userId = _userManager.GetUserId(User);
+            // Hämta medlemmen inkl. MembershipId från databasen
+            var member = await _memberRepository.GetMemberByUserIdAsync(userId);
+
+            if (member == null)
+            {
+                return View("NoMembership"); // Om användaren inte har gått med än
+            }
+
+            return View(member);
+        }
     }
 
 

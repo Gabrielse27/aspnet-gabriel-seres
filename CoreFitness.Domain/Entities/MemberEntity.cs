@@ -17,6 +17,7 @@ namespace CoreFitness.Domain.Entities;
 
         public string? ProfileImageUrl { get; set; }
 
+        public int MembershipId { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
         public DateTimeOffset ModifieAt { get; set; }
        
