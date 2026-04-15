@@ -30,6 +30,13 @@
                         <button type="submit" class="btn-booking btn-unbook">Unbook Session</button>
                     </form>
                 }
+
+
+
+                <p style="color: #adff2f; font-weight: bold;">
+                    @session.StartTime.ToString("MMM dd, HH:mm") - @session.EndTime.ToString("HH:mm")
+                </p>
+
             </div>
         }
     </div>

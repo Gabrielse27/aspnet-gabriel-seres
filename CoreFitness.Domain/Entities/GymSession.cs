@@ -12,6 +12,9 @@ namespace CoreFitness.Domain.Entities
         public string Description { get; set; } = null!;
         public string Category { get; set; } = null!;
 
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public string Instructor { get; set; } = string.Empty!;
         public string? BookedByUserId { get; set; }
         public virtual User? BookedByUser { get; set; }
 
