@@ -1,0 +1,37 @@
+﻿@model CoreFitness.Domain.Entities.GymSession
+
+
+@{
+    ViewData["Title"] = "Create Training Session";
+
+
+
+    <div class="admin-container" style="max-width: 600px; margin: 50px auto; padding: 30px; background: #111; border: 2px solid #adff2f; border-radius: 15px; color: white;">
+        <h2 style="color: #adff2f; margin-bottom: 25px;">Add New Training Session</h2>
+
+        <form asp-action="CreateSession" method="post">
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 5px;">Session Name</label>
+                <input asp-for="Name" style="width: 100%; padding: 10px; background: #222; border: 1px solid #444; color: white; border-radius: 5px;" placeholder="e.g. Morning Padel" required />
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 5px;">Description</label>
+                <textarea asp-for="Description" style="width: 100%; padding: 10px; background: #222; border: 1px solid #444; color: white; border-radius: 5px;" rows="4" placeholder="Describe the session..." required></textarea>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <label style="display: block; margin-bottom: 5px;">Category</label>
+                <select asp-for="Category" style="width: 100%; padding: 10px; background: #222; border: 1px solid #444; color: white; border-radius: 5px;">
+                    <option value="Personal Training">Personal Training</option>
+                    <option value="Group Training">Group Training</option>
+                    <option value="Padel">Padel</option>
+                </select>
+            </div>
+
+            <button type="submit" style="width: 100%; padding: 15px; background: #adff2f; color: black; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1.1rem;">
+                CREATE AND SAVE SESSION
+            </button>
+        </form>
+    </div>
+}

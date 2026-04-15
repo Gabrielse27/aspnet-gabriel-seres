@@ -64,7 +64,7 @@ namespace CoreFitness.Web.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(AccountDetailsViewModel model)
         {
 
@@ -122,7 +122,7 @@ namespace CoreFitness.Web.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveAccount()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -144,7 +144,7 @@ namespace CoreFitness.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Contact(CreateClientFormModel model)
         {
             if (ModelState.IsValid)
@@ -175,7 +175,7 @@ namespace CoreFitness.Web.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> JoinMembership(int membershipId)
         {
             // Hämta inloggad användare

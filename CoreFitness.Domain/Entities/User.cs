@@ -19,7 +19,7 @@ public class User : IdentityUser
     public string? LastName { get; set; }
 
     public string? ProfilePicture { get; set; }
-    public override string? PhoneNumber { get; set; }
+    //public override string? PhoneNumber { get; set; }
 
     public int Age { get; set; }
 
