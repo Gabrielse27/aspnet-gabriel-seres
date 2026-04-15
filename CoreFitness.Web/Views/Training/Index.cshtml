@@ -1,0 +1,36 @@
+﻿@model IEnumerable<CoreFitness.Domain.Entities.GymSession>
+
+@{
+    ViewData["Title"] = "Training Sessions";
+}
+
+<div class="training-wrapper">
+    <h1 style="color: white; margin-bottom: 40px;">Available Training Sessions</h1>
+
+    <div class="training-grid">
+        @foreach (var session in Model)
+        {
+            <div class="session-card">
+                <span class="category-badge">@session.Category</span>
+                <h2>@session.Name</h2>
+                <p>@session.Description</p>
+
+                @* Logik för att visa Boka eller Avboka baserat på om BookedByUserId är tom *@
+                @if (string.IsNullOrEmpty(session.BookedByUserId))
+                {
+                    <form asp-action="Book" method="post">
+                        <input type="hidden" name="sessionId" value="@session.Id" />
+                        <button type="submit" class="btn-booking btn-book">Book Session</button>
+                    </form>
+                }
+                else
+                {
+                    <form asp-action="Unbook" method="post">
+                        <input type="hidden" name="sessionId" value="@session.Id" />
+                        <button type="submit" class="btn-booking btn-unbook">Unbook Session</button>
+                    </form>
+                }
+            </div>
+        }
+    </div>
+</div>

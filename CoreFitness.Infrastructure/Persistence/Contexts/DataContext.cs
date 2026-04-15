@@ -4,6 +4,8 @@ using CoreFitness.Domain.Entities;
 using CoreFitness.Domain.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
+using User = CoreFitness.Domain.Identity.User;
 
 
 namespace CoreFitness.Infrastructure.Persistence.Contexts
@@ -14,6 +16,12 @@ namespace CoreFitness.Infrastructure.Persistence.Contexts
         {
 
             base.OnModelCreating(modelBuilder);
+
+            // Gör det tydligt att en session kan vara bokad av en användare
+    modelBuilder.Entity<GymSession>()
+        .HasOne(g => g.BookedByUser)
+        .WithMany() // Eller .WithMany(u => u.BookedSessions) om du lägger till en lista i User-entiteten
+        .HasForeignKey(g => g.BookedByUserId);
 
 
 
@@ -48,6 +56,8 @@ namespace CoreFitness.Infrastructure.Persistence.Contexts
         public DbSet<ContactRequestEntity> ContactRequests => Set<ContactRequestEntity>();
 
         public DbSet<ContactRequestEntity> Messages { get; set; }
+
+        public DbSet<GymSession> GymSessions { get; set; }
 
        
     }

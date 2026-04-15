@@ -627,7 +627,7 @@ body {
 
 /* Kortdesign */
 .membership-card {
-   
+    
     background: #FFFFFF;
     border-radius: 20px;
     width: 380px;
@@ -1224,11 +1224,12 @@ photo-faq-left {
     background-color: #D2EF39; /* Limegrön färg */
     background: #D2EF39 !important;
     min-width: 205px;
-    padding-left: 20px; 
+    padding-left: 20px;
     left: 36.5%;
     border-radius: 20px; /* Rundade hörn */
     list-style: none;
-    margin-top: 10px;
+    
+    
     border: none !important; /* Tar bort eventuella ramar från Bootstrap */
     box-shadow: none !important; /* Tar bort extra skuggor som kan se ut som färg */
 }
@@ -1903,6 +1904,68 @@ textarea.input-validation-error {
 }
 
 
+
+/* Training Sessions Styling */
+.training-wrapper {
+    margin-top: 2rem;
+    padding: 50px 20px;
+    background-color: #000;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.training-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.session-card {
+    background-color: #1a1a1a;
+    border: 2px solid #adff2f;
+    border-radius: 12px;
+    padding: 25px;
+    width: 320px;
+    color: white;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+    .session-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .session-card h2 {
+        color: #adff2f;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+    }
+
+.btn-booking {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.btn-book {
+    background-color: #adff2f;
+    color: #000;
+}
+
+.btn-unbook {
+    background-color: #ff4d4d;
+    color: white;
+}
 
 
 
