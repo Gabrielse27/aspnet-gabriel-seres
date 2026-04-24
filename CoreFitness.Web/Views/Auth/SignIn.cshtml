@@ -1,0 +1,33 @@
+﻿@model SignInViewModel
+
+<section class="flex items-center justify-center px-4 py-36 ">
+    <div class="w-2/5 bg-white rounded-[20px] shadow-sm p-16 flex flex-col gap-8 ">
+        <div class="space-y-2">
+            <h1>Welcome Back!</h1>
+            <p>
+                Log in to continue your fitness journey with full access to your customized program, training history,
+                and progress tracking. Stay consistent, monitor your development, and keep moving forward with the
+                structure and support built into your account.
+            </p>
+        </div>
+        <hr class="border-t border-gray-light" />
+        <div class="flex justify-center">
+
+            @if(Model.ExternalProviders.Any())
+            {
+                <form asp-controller="Auth" asp-action="ExternalLogin" method ="post">
+                    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl"/>
+
+                    @foreach (var provider in Model.ExternalProviders)
+                        {
+                            <partial name ="ExternalProviders/.@(provider)Button" />
+                        }
+
+                </form>
+            }
+
+            
+
+        </div>
+    </div>
+</section>

@@ -35,7 +35,24 @@ namespace CoreFitness.Web.Controllers
         
         }
 
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteSession(int id)
+        {
+
+
+            var session = await _context.GymSessions.FindAsync(id);
+            if (session != null)
+            {
+                _context.GymSessions.Remove(session);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index", "Training");
+        }
     }
+
 
 
 }

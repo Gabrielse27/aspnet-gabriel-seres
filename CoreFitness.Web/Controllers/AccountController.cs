@@ -40,6 +40,47 @@ namespace CoreFitness.Web.Controllers
         }
 
 
+
+        // Google Redirecting
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ExternalLogin(string provider, string returnUrl = null!)
+        {
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return Challenge(properties, provider);
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null!, string remoteError = null!)
+        {
+            if (remoteError != null) return RedirectToAction("Login", "Account");
+
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null) return RedirectToAction("Login", "Account");
+
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
+
+            if (result.Succeeded)
+            {
+                return LocalRedirect(returnUrl ?? "/");
+            }
+            else
+            {
+                // Här hamnar användaren om de inte har ett konto hos dig än
+                return RedirectToAction("Register", "Account");
+            }
+        }
+
+
+
+
+
+
+
+
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {

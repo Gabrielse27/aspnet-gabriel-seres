@@ -31,6 +31,16 @@
                     </form>
                 }
 
+                @if(User.IsInRole("Admin"))
+                {
+                    <form asp-controller="Admin" asp-action ="DeleteSession" asp-route-id ="@session.Id" method ="post"onsubmit="return confirm('Är du säker på att du vill ta bort detta pass?');">
+
+                        <button type="submit" style="background-color: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-top: 10px; width: 50%;">
+                            Delete Class
+                        </button>
+                        </form>
+                }
+                  
 
 
                 <p style="color: #adff2f; font-weight: bold;">
