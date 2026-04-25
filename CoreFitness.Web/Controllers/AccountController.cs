@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace CoreFitness.Web.Controllers
 {
@@ -66,13 +67,99 @@ namespace CoreFitness.Web.Controllers
             {
                 return LocalRedirect(returnUrl ?? "/");
             }
+
             else
             {
-                // Här hamnar användaren om de inte har ett konto hos dig än
-                return RedirectToAction("Register", "Account");
+                // 1. Hämta e-postadressen från Googles information
+                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+
+                if (email != null)
+                {
+                    // 2. Skapa användarobjektet automatiskt i bakgrunden
+                    var user = new User { UserName = email, Email = email };
+
+                    // 3. Försök skapa användaren i din databas
+                    var creationResult = await _userManager.CreateAsync(user);
+
+                    if (creationResult.Succeeded)
+                    {
+                        // 4. Koppla ihop Google-kontot med din nya användare
+                        await _userManager.AddLoginAsync(user, info);
+
+                        // 5. Logga in användaren direkt!
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+
+                        // 6. Skicka dem till startsidan (eller där de kom ifrån)
+                        return LocalRedirect(returnUrl ?? "/");
+                    }
+                }
+
+                // Om något gick fel (t.ex. om e-posten redan finns), skicka till vanlig login
+                return RedirectToAction("Login", "Account");
             }
+
         }
 
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            // Detta raderar användarens inloggnings-cookie
+            await _signInManager.SignOutAsync();
+
+            // Skicka tillbaka användaren till startsidan
+            return RedirectToAction("Index", "Home");
+        }
+
+
+
+
+
+
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> Register(string? returnUrl = null)
+        {
+            // Hämta informationen som Google skickade med (t.ex. e-post)
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null) return RedirectToAction("Login");
+
+            // Skapa en modell som förbereder vyn med användarens e-post
+            var model = new RegisterViewModel
+            {
+                Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+            };
+
+            ViewData["ReturnUrl"] = returnUrl;
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterViewModel model, string? returnUrl = null)
+        {
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null) return RedirectToAction("Login");
+
+            if (ModelState.IsValid)
+            {
+                var user = new User { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    // Koppla ihop det nya kontot med Google-inloggningen
+                    await _userManager.AddLoginAsync(user, info);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(returnUrl ?? "/");
+                }
+            }
+            return View(model);
+        }
 
 
 

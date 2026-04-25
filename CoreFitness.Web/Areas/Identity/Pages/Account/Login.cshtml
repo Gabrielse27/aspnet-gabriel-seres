@@ -29,8 +29,10 @@
 
 
             <form asp-controller="Account" asp-action="ExternalLogin" method="post" class="form-horizontal">
-    <div>
-        <p>
+                <div>
+
+                    @Html.AntiForgeryToken()
+        
             
                         <button type="submit" name="provider" value="Google" class="gsi-material-button mt-1.5">
                             <div class="gsi-material-button-state"></div>
@@ -49,7 +51,7 @@
                             </div>
                         </button>
 
-        </p>
+        
     </div>
 </form>
 
