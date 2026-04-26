@@ -57,12 +57,12 @@ namespace CoreFitness.Web.Controllers
             {
                 session.BookedByUserId = user.Id;
                 await _context.SaveChangesAsync();
-            }
 
+               
+            }
             return RedirectToAction(nameof(Index));
 
         }
-
         //  Logik för att Avboka
         [HttpPost]
         public async Task<IActionResult> Unbook(int sessionId)
@@ -73,8 +73,9 @@ namespace CoreFitness.Web.Controllers
             {
                 session.BookedByUserId = null; // Tar bort bokningen
                 await _context.SaveChangesAsync();
-            }
 
+                
+            }
             return RedirectToAction(nameof(Index));
         }
     }    

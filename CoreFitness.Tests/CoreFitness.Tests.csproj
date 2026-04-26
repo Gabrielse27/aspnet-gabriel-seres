@@ -12,6 +12,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.7" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.4.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="4.2.1" />
     <PackageReference Include="MSTest.TestFramework" Version="4.2.1" />
@@ -24,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CoreFitness.Domain\CoreFitness.Domain.csproj" />
+    <ProjectReference Include="..\CoreFitness.Infrastructure\CoreFitness.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
