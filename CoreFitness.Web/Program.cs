@@ -7,6 +7,8 @@ using CoreFitness.Domain.Repositoryes.Members;
 using CoreFitness.Infrastructure.Persistence.Contexts;
 using CoreFitness.Infrastructure.Repositories;
 using CoreFitness.Infrastructure.Repositories.Members;
+using CoreFitness.Web.Repositories;
+using CoreFitness.Web.Services;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -41,8 +43,20 @@ builder.Services.AddRazorPages();
 // 1. Registrera Repositoryt (Hjärnan som pratar med databasen)
 builder.Services.AddScoped<IMemberRepository, MemberRepository>();
 
+
+builder.Services.AddScoped<IGymSessionRepository, GymSessionRepository>();
+builder.Services.AddScoped<ITrainingService, TrainingService>();
+builder.Services.AddScoped<IBookingService, BookingService>();
+
+
 // 2. Registrera Servicen (Hjärnan som håller i logiken)
 builder.Services.AddScoped<IGymService, GymService>();
+
+
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<IBookingService, BookingService>();
+
+
 
 
 builder.Services.AddAuthentication()

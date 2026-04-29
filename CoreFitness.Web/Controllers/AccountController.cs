@@ -7,6 +7,7 @@ using CoreFitness.Domain.Repositoryes.Members;
 using CoreFitness.Infrastructure.Persistence.Contexts;
 using CoreFitness.Infrastructure.Repositories.Members;
 using CoreFitness.Web.Models;
+using CoreFitness.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -27,18 +28,22 @@ namespace CoreFitness.Web.Controllers
         private readonly DataContext _context;
         private readonly IGymService _gymService;
         private readonly IMemberRepository _memberRepository;
+        private readonly IBookingService _bookingService;
+
        
         // 2. Ta emot den i constructorn
         public AccountController (UserManager<User> userManager, SignInManager<User> signInManager, DataContext context,
             IGymService gymService, 
-            IMemberRepository memberRepository)
+            IMemberRepository memberRepository, IBookingService bookingService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
             _gymService = gymService;
-            _memberRepository = memberRepository;   
+            _memberRepository = memberRepository;
+            _bookingService = bookingService;
         }
+
 
 
 
@@ -99,6 +104,31 @@ namespace CoreFitness.Web.Controllers
             }
 
         }
+
+
+
+
+
+        // 3. HÄR ÄR DIN NYA METOD
+        public async Task<IActionResult> MyBookings()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return Challenge(); // Skickar till inloggning om ej inloggad
+
+            // Anropar tjänsten
+            var bookings = await _bookingService.GetUserBookingsAsync(user.Id);
+
+            return View(bookings);
+        }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -343,6 +373,9 @@ namespace CoreFitness.Web.Controllers
 
             return View(member);
         }
+
+
+        
     }
 
 

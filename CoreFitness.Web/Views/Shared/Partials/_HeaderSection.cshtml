@@ -1,13 +1,22 @@
 ﻿
 @{
+    // Vi kollar om vi är på Home/Index (startsidan)
+    var isHomePage = ViewContext.RouteData.Values["Controller"]?.ToString() == "Home" &&
+                     ViewContext.RouteData.Values["Action"]?.ToString() == "Index";
+
+    // Om vi INTE är på startsidan, lägg till "rounded-full", annars lägg till ingenting ("")
+    var navRounding = isHomePage ? "" : "rounded-3xl";
+
+
 
 }
 
-<nav class="flex w-full items-center justify-between px-10 py-6 bg-black border-b border-opacity-130 border-[#5C510A] border-t-[0.5px]">
+<nav class="flex w-full items-center justify-between px-10 py-6 bg-black border-b   border-opacity-130 border-[#5C510A] border-t-[0.5px]  @navRounding">
 
     <div class="flex items-center gap-2.5">
         <img src="~/images/logo.svg" alt="CoreFitness Logo" class="h-[60px] w-auto" />
     </div>
+    
 
     
 

@@ -1,11 +1,14 @@
-﻿@model IEnumerable<CoreFitness.Domain.Entities.GymSession>
+﻿@using CoreFitness.Domain.Entities
+@model IEnumerable<CoreFitness.Domain.Entities.GymSession>
 
 @{
     ViewData["Title"] = "Training Sessions";
+
+   
 }
 
 <div class="training-wrapper">
-    <h1 style="color: white; margin-bottom: 40px;">Available Training Sessions</h1>
+    <h1 style="color: white; margin-top: 70px; margin-bottom: 50px; font-size: 24px;">Available Training Sessions</h1>
 
     <div class="training-grid">
         @foreach (var session in Model)
@@ -20,6 +23,7 @@
                 {
                     <form asp-action="Book" method="post">
                         <input type="hidden" name="sessionId" value="@session.Id" />
+                        <input type="hidden" name="category"  value="@session.Category" />    
                         <button type="submit" class="btn-booking btn-book">Book Session</button>
                     </form>
                 }
@@ -27,6 +31,7 @@
                 {
                     <form asp-action="Unbook" method="post">
                         <input type="hidden" name="sessionId" value="@session.Id" />
+                        <input type="hidden" name="category" value="@session.Category" />
                         <button type="submit" class="btn-booking btn-unbook">Unbook Session</button>
                     </form>
                 }

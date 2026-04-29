@@ -1288,6 +1288,7 @@ body {
 
     .myaccount-title {
         text-align: center;
+        margin-top: 50px;
         font-size: 48px;
         font-weight: 600;
     }
