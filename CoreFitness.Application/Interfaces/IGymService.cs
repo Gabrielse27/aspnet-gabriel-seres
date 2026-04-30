@@ -10,8 +10,8 @@ namespace CoreFitness.Application.Interfaces
     public interface IGymService
     {
         // Pass klasser
-        Task<IEnumerable<GymPass>> GetAllPassesAsync();
-        Task<GymPass?> GetPassByIdAsync(int id);
+        Task<IEnumerable<GymSession>> GetAllPassesAsync();
+        Task<GymSession?> GetPassByIdAsync(int id);
 
 
         //Booking 

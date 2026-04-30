@@ -29,6 +29,28 @@
                 </select>
             </div>
 
+            <div style="margin-bottom: 15px;">
+                <label>Instructor Name</label><br />
+                <input asp-for="Instructor" style="width: 100%; padding: 8px; background: #222; color: white; border: 1px solid #444; border-radius: 5px;" />
+            </div>
+
+
+
+            <div style="margin-bottom: 15px;">
+                <label>Start Time</label><br />
+                <input asp-for="StartTime" type="datetime-local" style="width: 100%; padding: 8px; background: #222; color: white; border: 1px solid #444;" />
+            </div>
+
+
+           
+
+            <div style="margin-bottom: 15px;">
+                <label>End Time</label><br />
+                <input asp-for="EndTime" type="datetime-local" style="width: 100%; padding: 8px; background: #222; color: white; border: 1px solid #444;" />
+            </div>
+
+
+
             <button type="submit" style="width: 100%; padding: 15px; background: #adff2f; color: black; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1.1rem;">
                 CREATE AND SAVE SESSION
             </button>

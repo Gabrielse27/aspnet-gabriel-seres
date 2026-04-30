@@ -1,20 +1,27 @@
 ﻿
 @{
+    // Vi kollar om vi är på Home/Index (startsidan)
+    var isHomePage = ViewContext.RouteData.Values["Controller"]?.ToString() == "Home" &&
+                     ViewContext.RouteData.Values["Action"]?.ToString() == "Index";
+
+    // Om vi INTE är på startsidan, lägg till "rounded-full", annars lägg till ingenting ("")
+    var navRounding = isHomePage ? "" : "rounded-3xl";
+
+
 
 }
 
-<nav class="main-navbar" style="display: flex; justify-content: space-between; align-items: center;
- padding: 20px 50px; background-color: var(--bg-dark); border-bottom: 1px solid #333; ">
+<nav class="flex w-full items-center justify-between px-10 py-6 bg-black border-b   border-opacity-130 border-[#5C510A] border-t-[0.5px]  @navRounding">
 
-
-    <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
-        <img src="~/images/logo.svg" alt="CoreFitness Logo" style="height: 40px; width: auto;" />
-
-
+    <div class="flex items-center gap-2.5">
+        <img src="~/images/logo.svg" alt="CoreFitness Logo" class="h-[60px] w-auto" />
     </div>
+    
+
+    
 
 
-    <ul style="display: flex; list-style: none; gap: 30px; margin: 0; padding: 0;">
+    <ul class="flex-1 flex list-none gap-x-8 justify-center items-center ml-10 m-5 text-lg">
         <li><a class="nav-link" asp-controller="Home" asp-action="Index">Fitness Centers</a></li>
         <li><a class="nav-link" asp-controller="Home" asp-action="Memberships">Memberships</a></li>
 
@@ -27,9 +34,9 @@
 
                 <ul class="custom-dropdown-menu">
 
-                   <li><a class="dropdown-item" asp-controller="Training" asp-action="Index" asp-route-category="Personal Training">Personal Training</a></li>
-                   <li><a class="dropdown-item" asp-controller="Training" asp-action="Index" asp-route-category="Group Training">Group Training</a></li>
-                   <li><a class="dropdown-item" asp-controller="Training" asp-action="Index" asp-route-category="Padel">Padel</a></li>  
+                    <li><a class="dropdown-item" asp-controller="Training" asp-action="Index" asp-route-category="Personal Training">Personal Training</a></li>
+                    <li><a class="dropdown-item" asp-controller="Training" asp-action="Index" asp-route-category="Group Training">Group Training</a></li>
+                    <li><a class="dropdown-item" asp-controller="Training" asp-action="Index" asp-route-category="Padel">Padel</a></li>
                 </ul>
             </ul>
 
@@ -39,11 +46,21 @@
         <li><a class="nav-link" asp-controller="Home" asp-action="CustomerService">Customer Service</a></li>
 
 
-        <li><a class="nav-link" asp-controller="Home" asp-action="Store">Store</a></li>
+        <li>
+            <li>
+                <a asp-controller="Store" asp-action="Index" class="nav-link">
+                    Store
+                </a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link" asp-controller="Admin" asp-action="CreateSession" style="color: #adff2f; border: 1px solid #adff2f; padding: 5px 15px; border-radius: 20px; margin-left: 10px;">Admin</a>
-        </li>
+            </li>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <li class= "nav-item">
+                <a class= "nav-link" asp-controller = "Admin" asp-action = "CreateSession" style = "color: #adff2f; border: 1px solid #adff2f; padding: 5px 15px; border-radius: 20px; margin-left: 10px;" > Admin </a>
+            </li>
+        }
 
 
     </ul>
@@ -66,6 +83,19 @@
             <a asp-controller="Account" asp-action="Index" asp-area="" class="btn-gym">
                 My Account <i class="fa-solid fa-chevron-right" style="transform: translateY(2px);"></i>
             </a>
+
+
+
+            
+            <form asp-controller ="Account" asp-action="Logout" method="post" class="">
+               
+            </form>
+
+
+
+
+
+
         }
         else
         {

@@ -1,0 +1,4 @@
+﻿ALTER TABLE dbo.Bookings
+ADD SessionName NVARCHAR(MAX) NULL,
+    StartTime DATETIME NULL,
+    EndTime DATETIME NULL;

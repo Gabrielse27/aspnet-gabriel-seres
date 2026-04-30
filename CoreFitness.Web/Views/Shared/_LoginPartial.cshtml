@@ -10,17 +10,24 @@
 
 <ul class="navbar-nav">
     @* Detta visas när du är inloggad *@
-    <li class="nav-item">
-        <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index">Hej @User.Identity?.Name!</a>
-    </li>
+
+
+
+    
+
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index">Hej @User.Identity?.Name!</a>
+        </li>
     }
     else
     {
-    @* Detta visas när du är utloggad *@
-    <li class="nav-item">
-        <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
+        @* Detta visas när du är utloggad *@
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>            
+    
+
 </ul>

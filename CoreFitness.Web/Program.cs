@@ -1,20 +1,30 @@
 using CoreFitness.Application;
 using CoreFitness.Application.Interfaces;
 using CoreFitness.Application.Services;
+using CoreFitness.Domain.Entities;
 using CoreFitness.Domain.Identity;
 using CoreFitness.Domain.Repositoryes.Members;
 using CoreFitness.Infrastructure.Persistence.Contexts;
+using CoreFitness.Infrastructure.Repositories;
+using CoreFitness.Infrastructure.Repositories.Members;
+using CoreFitness.Web.Repositories;
+using CoreFitness.Web.Services;
+using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
-using CoreFitness.Infrastructure.Repositories;
-using CoreFitness.Infrastructure.Repositories.Members;
-;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
+
+
 // Registrerar Identity-systemet så att SignInManager kan användas
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<DataContext>(); // Se till att namnet på din DbContext stämmer
 
 // 1. Koppla mot databasen med Connection String från appsettings.json
@@ -33,9 +43,42 @@ builder.Services.AddRazorPages();
 // 1. Registrera Repositoryt (Hjärnan som pratar med databasen)
 builder.Services.AddScoped<IMemberRepository, MemberRepository>();
 
+
+builder.Services.AddScoped<IGymSessionRepository, GymSessionRepository>();
+builder.Services.AddScoped<ITrainingService, TrainingService>();
+builder.Services.AddScoped<IBookingService, BookingService>();
+
+
 // 2. Registrera Servicen (Hjärnan som håller i logiken)
 builder.Services.AddScoped<IGymService, GymService>();
 
+
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<IBookingService, BookingService>();
+
+
+
+
+builder.Services.AddAuthentication()
+    .AddGoogle(options =>
+    {
+        options.ClientId = builder.Configuration["Authentication:Google:ClientId"] ?? throw new InvalidOperationException("Google ClientId is not configured.");
+        options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"] ?? throw new InvalidOperationException("Google ClientSecret is not configured.");
+
+
+        options.Events = new OAuthEvents
+        {
+            OnRedirectToAuthorizationEndpoint = context =>
+            {
+                context.RedirectUri += "&prompt=login";
+                context.Response.Redirect(context.RedirectUri);
+                return Task.CompletedTask;
+            }
+        };
+
+
+
+    });
 
 var app = builder.Build();
 
@@ -63,6 +106,30 @@ app.MapControllerRoute(
 
 
 app.MapRazorPages();
+
+
+
+ static void SeedDatabase(DataContext context)
+{
+    if (!context.GymSessions.Any()) // Om tabellen är helt tom
+    {
+        context.GymSessions.AddRange(new List<GymSession>
+        {
+            new GymSession { Name = "Padel Nybörjare", Category = "Padel", Description = "Tränna Padel med coach"},
+            new GymSession { Name = "PT Pass", Category = "Personal Training", Description = "Öva fina rörelser" },
+            new GymSession { Name = "Yoga", Category = "Group Training", Description = "Snabb Tempo Training" }
+        });
+        context.SaveChanges();
+    }
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<DataContext>();
+    SeedDatabase(context);
+}
+
 
 app.Run();
 

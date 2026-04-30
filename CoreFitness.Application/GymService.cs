@@ -21,9 +21,9 @@ namespace CoreFitness.Application.Services
             _memberRepository = memberRepository;
         }
 
-        public async Task<IEnumerable<GymPass>> GetAllPassesAsync()
+        public async Task<IEnumerable<GymSession>> GetAllPassesAsync()
         {
-            return new List<GymPass>(); // Implementeras senare
+            return new List<GymSession>(); // Implementeras senare
         }
 
         public async Task<bool> BookPassAsync(int passId, string userId)
@@ -58,7 +58,7 @@ namespace CoreFitness.Application.Services
         }
 
         // --- ÖVRIGA METODER (Fylls i vid behov) ---
-        public Task<GymPass?> GetPassByIdAsync(int id) => throw new NotImplementedException();
+        public Task<GymSession?> GetPassByIdAsync(int id) => throw new NotImplementedException();
         public Task<IEnumerable<Booking>> GetUserBookingAsync(string userId) => throw new NotImplementedException();
         public Task<bool> CancelBookingAsync(int bookingId, string userId) => throw new NotImplementedException();
     }

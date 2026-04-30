@@ -1,0 +1,10 @@
+﻿namespace CoreFitness.External.Presentation.Web.ViewModels
+{
+    public class SignInViewModel
+    {
+        public string? ReturnUrl { get; set; }
+
+        public List<string> ExternalProviders { get; set; } = [];
+
+    }
+}

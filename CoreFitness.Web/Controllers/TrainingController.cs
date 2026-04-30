@@ -1,82 +1,52 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoreFitness.Domain.Entities;
+using CoreFitness.Domain.Identity;
+using CoreFitness.Infrastructure.Persistence.Contexts; // Dubbelkolla att detta stämmer med din DataContext-mapp
+using CoreFitness.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CoreFitness.Infrastructure.Persistence.Contexts; // Dubbelkolla att detta stämmer med din DataContext-mapp
-using CoreFitness.Domain.Entities;
-using CoreFitness.Web.Models;
 using Microsoft.IdentityModel.Tokens;
-using CoreFitness.Domain.Identity;
-
+using CoreFitness.Web.Services;
 
 
 namespace CoreFitness.Web.Controllers
 {
-    [Authorize]  // Endast Inloggade kan se boka/pass
+    [Authorize]
     public class TrainingController : Controller
     {
-        private readonly DataContext _context;
+        // Vi tar bort DataContext helt och hållet från kontrollern!
+        private readonly ITrainingService _trainingService;
         private readonly UserManager<User> _userManager;
 
-
-        public TrainingController(DataContext context, UserManager<User> userManager)
+        public TrainingController(ITrainingService trainingService, UserManager<User> userManager)
         {
-            _context = context;
+            _trainingService = trainingService;
             _userManager = userManager;
         }
 
-
-        // Visa alla pass
-        public async Task <IActionResult> Index(string category)
+        public async Task<IActionResult> Index(string category)
         {
-            var user = await _userManager.GetUserAsync(User);
-
-                // Hämtar passen från databasen
-                var query = _context.GymSessions.AsQueryable();
-
-            if (!string.IsNullOrEmpty(category))
-            {
-                query = query.Where(x => x.Category == category);
-            }
-
-            var sessions = await query.ToListAsync();
-
+            // Kontrollern vet inte hur data hämtas, den bara frågar servicen
+            var sessions = await _trainingService.GetAllSessionsAsync(category);
             return View(sessions);
         }
 
-
-        // Logik för att boka
-
         [HttpPost]
-        public async Task<IActionResult> Book(int sessionId)
+        public async Task<IActionResult> Book(int sessionId, string? category = null)
         {
             var user = await _userManager.GetUserAsync(User);
-            var session = await _context.GymSessions.FindAsync(sessionId);
+            if (user != null)
+                await _trainingService.BookSessionAsync(sessionId, user.Id);
 
-            if (session != null && user != null) 
-            {
-                session.BookedByUserId = user.Id;
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToAction(nameof(Index));
-
+            return RedirectToAction(nameof(Index), new { category });
         }
 
-        //  Logik för att Avboka
         [HttpPost]
-        public async Task<IActionResult> Unbook(int sessionId)
+        public async Task<IActionResult> Unbook(int sessionId, string? category = null)
         {
-            var session = await _context.GymSessions.FindAsync(sessionId);
-
-            if (session != null)
-            {
-                session.BookedByUserId = null; // Tar bort bokningen
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToAction(nameof(Index));
+            await _trainingService.UnBookSessionAsync(sessionId);
+            return RedirectToAction(nameof(Index), new { category });
         }
-    }    
-}   
-
+    }
+}

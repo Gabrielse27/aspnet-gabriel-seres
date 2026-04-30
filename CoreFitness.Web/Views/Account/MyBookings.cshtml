@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CoreFitness.Domain.Entities.Booking>
+
+    @{
+        ViewData["Title"] = "My Bookings";
+    }
+
+    <h2>Mina Bokningar</h2>
+
+@if (Model != null && Model.Any())
+{
+    
+    <div class="overflow-hidden rounded-lg shadow-md border border-gray-200">
+        <table class="max-w-5xl text-left border-collapse">
+            <thead>
+                <tr class="bg-gray-100 text-gray-700 uppercase text-sm">
+                    <th class="px-7 py-2  text-left" >ID</th>
+                    <th class="px-6 py-2 text-left">Sport/Pass</th>
+                    <th class="px-2 py-2 text-left">Bokat Tid</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                @foreach (var booking in Model)
+                {
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4">@booking.GymPassId</td>
+                        <td class="px-6 py-4 font-semibold text-blue-600">@booking.SessionName</td>
+                        <td class="px-2 py-4 text-left text-gray-600">
+                            @booking.BookedAt.ToString("yyyy-MM-dd") <br />
+                            <span class="text-sm">@booking.StartTime.ToString("HH:mm") - @booking.EndTime.ToString("HH:mm")</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+
+}
+else
+{
+    <p>Du har inga bokningar ännu.</p>
+}

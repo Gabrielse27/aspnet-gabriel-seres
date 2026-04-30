@@ -7,7 +7,7 @@ using CoreFitness.Domain.Entities;
 namespace CoreFitness.Web.Controllers
 {
 
-    [Authorize] // Endast Inloggade kan se admin-sidan
+    [Authorize (Roles = "Admin")] 
     public class AdminController : Controller
     {
         private readonly DataContext _context;
@@ -15,7 +15,7 @@ namespace CoreFitness.Web.Controllers
         {
             _context = context;
         }
-        [Authorize] // Endast användare med rollen "Admin" kan komma åt denna action
+        [Authorize] // Endast användare med rollen "Admin"( kan komma åt denna action
         public IActionResult CreateSession()
         {
             
@@ -35,7 +35,24 @@ namespace CoreFitness.Web.Controllers
         
         }
 
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteSession(int id)
+        {
+
+
+            var session = await _context.GymSessions.FindAsync(id);
+            if (session != null)
+            {
+                _context.GymSessions.Remove(session);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index", "Training");
+        }
     }
+
 
 
 }

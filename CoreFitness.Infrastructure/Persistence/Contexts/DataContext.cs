@@ -58,6 +58,7 @@ namespace CoreFitness.Infrastructure.Persistence.Contexts
         public DbSet<ContactRequestEntity> Messages { get; set; }
 
         public DbSet<GymSession> GymSessions { get; set; }
+        public DbSet<Booking>Bookings { get; set; }
 
        
     }
