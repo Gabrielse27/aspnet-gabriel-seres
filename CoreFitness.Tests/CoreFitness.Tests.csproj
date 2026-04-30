@@ -27,6 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CoreFitness.Domain\CoreFitness.Domain.csproj" />
     <ProjectReference Include="..\CoreFitness.Infrastructure\CoreFitness.Infrastructure.csproj" />
+    <ProjectReference Include="..\CoreFitness.Web\CoreFitness.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>
