@@ -325,8 +325,10 @@ namespace CoreFitness.Web.Controllers
                 // 3. Spara ändringarna till databasen på riktigt
                 await _context.SaveChangesAsync();
 
+                TempData["SuccessMessage"] = "The message was sent !";
+
                 // Skicka användaren vidare till en tack-sida eller startsidan
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("CustomerService", "Home");
             }
 
             return View("~/Views/Home/CustomerService.cshtml", model);

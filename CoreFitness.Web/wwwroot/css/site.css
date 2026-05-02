@@ -1338,9 +1338,12 @@ body {
         border-bottom: 1px solid #eee;
     }
 
-        .menu-item.active {
-            color: #D2EF39;
-        }
+        .menu-item:hover {
+            background-color: #ffffff; /* Ljusgrå bakgrund */
+            color: #D6EB31; /* Samma gröna färg som din meny-header */
+            padding-left: 25px; /* Ger en liten "push"-effekt åt höger */
+        } 
+
 
     /* Main Content styling */
     .account-main {
