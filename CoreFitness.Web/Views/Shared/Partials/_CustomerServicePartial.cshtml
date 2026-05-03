@@ -47,6 +47,15 @@
             <h2 class="cs-form-title">Contact Us Today</h2>
             <p class="cs-form-text">Ready to begin your fitness journey? Contact GymPro today and let our expert trainers guide you with the right program and support.</p>
 
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4 font-bold shadow-md">
+                    @TempData["SuccessMessage"]
+                </div>
+            }
+
+
+
             <form asp-action="Contact" asp-controller="Account" method="post" class="cs-actual-form">
                 <div class="cs-form-row">
                     <div class="cs-input-group">

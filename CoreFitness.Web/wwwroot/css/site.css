@@ -98,28 +98,8 @@ body {
 
 }
 
-/* --- MOBIL (Bas-kod: tvinga kolumn) --- */
-/* 1. Din globala layout (denna gäller överallt) */
-/*.main-navbar {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: var(--bg-dark);
-    border-bottom: 1px solid #333;
-    border-radius: 20px;
-}
 
-@media (min-width: 768px) {
-    .main-navbar {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        padding: 20px 50px;
-        border-radius: 20px;
-    }   */
-}
+
 .home-page .main-navbar {
     border-radius: 0;
 }  
@@ -172,21 +152,21 @@ body {
     .logo-item img {
         height: 30px; /* Ändra detta värde för att göra dem mindre (t.ex. 20px) */
         width: auto; /* Bibehåller proportionerna så de inte blir utdragna */
-        opacity: 0.8; /* Valfritt: gör dem lite diskretare som i Figma */
+        opacity: 0.8; 
         margin-left: 2rem;
     }
 
     .logo-item {
         flex-shrink: 1; /* Tillåter objekten att bli lite mindre om det behövs */
-        font-size: 1.5rem; /* Minska textstorleken */
+        font-size: 1.5rem;
     }
 
     .logo-item-accent {
         margin-left: auto; /* Denna fungerar som en magnet som trycker bort allt till vänster */
-        padding-right: 10%; /* Ger lite luft till högerkanten, precis som i Figma */
+        padding-right: 10%; /* Ger lite luft till högerkanten */
         text-transform: uppercase;
         font-weight: bold;
-        display: flex; /* Lägg till denna för att säkerställa att den beter sig rätt */
+        display: flex; 
         align-items: center;
         font-size: 1.5rem;
     }
@@ -196,7 +176,7 @@ body {
         display: inline-flex;
         align-items: center;
         gap: 10px; /* Mellanrum mellan pricken och texten */
-        background-color: rgba(255, 255, 255, 0.1); /* Halvgenomskinlig bakgrund som i skissen */
+        background-color: rgba(255, 255, 255, 0.1); 
         padding: 8px 20px;
         border-radius: 30px;
     }
@@ -205,7 +185,7 @@ body {
         height: 8px;
         width: 8px;
         background-color: #CCFF00; /* Din limegröna färg */
-        border-radius: 50%; /* Gör den helt rund */
+        border-radius: 50%; 
         display: inline-block;
     }
 
@@ -227,11 +207,11 @@ body {
         grid-template-columns: 1fr 1fr; /* Skapar två lika breda kolumner */
         gap: 20px; /* Avstånd mellan raderna och kolumnerna */
         margin-bottom: 30px; /* Avstånd ner till knappen */
-        max-width: 600px; /* Justera så att det passar din design */
+        max-width: 600px; 
     }
 
         .hero-features-icons span {
-            display: flex; /* Lägger ikon och text bredvid varandra */
+            display: flex; 
             align-items: center; /* Centrerar ikonen vertikalt med texten */
             gap: 10px; /* Avstånd mellan ikonen och texten */
             color: white;
@@ -239,21 +219,21 @@ body {
         }
 
     .feature-icon {
-        width: 20px; /* Justera storleken på din bock-ikon */
+        width: 20px; 
         height: auto;
     }
 
 .separator-line {
     margin-top: 1rem;
     border: 0;
-    border-top: 1px solid rgba(214, 200, 49, 0.3); /* Din limegröna färg med lite genomskinlighet */
+    border-top: 1px solid rgba(214, 200, 49, 0.3); /*  limegröna färg med lite genomskinlighet */
     margin: 30px 0; /* Skapar avstånd ovanför och under linjen */
     width: 100%; /* Gör att den sträcker sig över hela bredden */
 }
 
     .about-section {
         padding: 80px 0;
-        background-color: #f9f9f9; /* Eller den färg du föredrar */
+        background-color: #f9f9f9; 
         color: #000;
     }
 
@@ -373,6 +353,10 @@ body {
         display: flex;
     }
 
+        .programs-card:hover {
+            transform: translateY(-5px);
+        }
+
     .program-card img {
         width: 100%;
         height: 100%;
@@ -380,7 +364,7 @@ body {
         transition: transform 0.3s ease;
     }
 
-    /* En liten bonus: bilderna zoomar lite när man hovrar */
+    
     .program-card:hover img {
         transform: scale(1.05);
     }
@@ -462,18 +446,18 @@ body {
     }
 
     /* Själva produktkorten */
-    .product-card {
+    .store-product-card {
         background-color: #f8f9fa; /* Ljusgrå/vit bakgrund som på bilden */
         border-radius: 20px;
         height: 300px;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 30px;
+        padding: 10px;
         transition: transform 0.3s ease;
     }
 
-        .product-card:hover {
+        .store-product-card:hover {
             transform: translateY(-5px); /* Lyfter lite när man hovrar */
         }
 
@@ -509,7 +493,7 @@ body {
         color: #ffffff;
         width: 90%;
         border-top: 1px solid #333; /* En tunn linje för att markera slutet */
-        max-width: 1200px; /* Samma bredd som din header/nav */
+        max-width: 1200px; /* Samma bredd som  header/nav */
         border-radius: 20px;
         padding: 30px 40px;
     }
@@ -576,7 +560,7 @@ body {
     }
 
     .footer-column h4 {
-        margin-bottom: 20px; /* Justera siffran för mer eller mindre mellanrum */
+        margin-bottom: 20px; 
         display: block; /* Säkerställer att marginalen tas hänsyn till */
         font-weight: 600;
     }
@@ -640,10 +624,15 @@ body {
         text-align: left;
     }
 
+.membership-card:hover {
+    transform: translateY(-5px);
+}
+
+
     .card-body {
         padding: 30px 20px;
-        display: flex; /* Aktiverar flexbox */
-        flex-direction: column; /* Staplar innehållet vertikalt */
+        display: flex; 
+        flex-direction: column; 
 
         flex-grow: 1;
     }
@@ -861,8 +850,8 @@ body {
     /* Gemensam stil för alla ikoner */
     .membership-info-row i {
         display: inline-block;
-        width: 18px; /* Bredd från Figma */
-        height: 20px; /* Höjd från Figma */
+        width: 18px; 
+        height: 20px; 
         background-size: contain;
         background-repeat: no-repeat;
     }
@@ -877,7 +866,7 @@ body {
         margin-top: 0.3rem;
         background-repeat: no-repeat;
         display: inline-flex; /* Viktigt för att width/height ska fungera */
-        width: 25px; /* Prova att sänka från 40px för att matcha texten bättre */
+        width: 25px; 
     }
 
     .icon-clock {
@@ -906,7 +895,7 @@ body {
     .faq-container-membership {
         max-width: 1200px;
         margin: 0 auto;
-        display: flex; /* Lägger bild och text sida vid sida */
+        display: flex; 
         align-items: flex-start;
         gap: 50px; /* Skapar avstånd mellan bilden och texten */
         padding: 0 20px;
@@ -1060,7 +1049,6 @@ body {
         position: relative;
         margin-top: 8rem;
         position: relative; /* Viktigt! Detta gör att overlayen klistras mot kortet, inte skärmen */
-        /* Rundade hörn som på bilden */
         overflow: hidden; /* Ser till att ingenting sticker ut utanför hörnen */
         width: 100%; /* Tar upp tillgänglig bredd (t.ex. i ett flex-grid) */
         box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Mjuk skugga för lite djup */
@@ -1214,7 +1202,6 @@ body {
     /* Själva den gröna boxen */
     .custom-dropdown-menu {
         display: none; /* Visas vid hover via JS eller CSS */
-
         position: absolute;
         background-color: #D2EF39; /* Limegrön färg */
         background: #D2EF39 !important;
@@ -1223,7 +1210,7 @@ body {
         left: 42.5%;
         border-radius: 20px; /* Rundade hörn */
         list-style: none;
-        /* Tar bort extra skuggor som kan se ut som färg */
+        
     }
 
     /* Visar menyn när man hovrar över föräldern */
@@ -1338,9 +1325,12 @@ body {
         border-bottom: 1px solid #eee;
     }
 
-        .menu-item.active {
-            color: #D2EF39;
-        }
+        .menu-item:hover {
+            background-color: #ffffff; 
+            color: #D6EB31; 
+            padding-left: 25px; 
+        } 
+
 
     /* Main Content styling */
     .account-main {

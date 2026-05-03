@@ -17,7 +17,7 @@ namespace CoreFitness.Web.Services
             // Vi hämtar passet först för att få namnet och tiderna till vår mappning
             var session = await _repository.GetByIdAsync(sessionId);
 
-            if (session != null)
+            if (session == null)
             {
                 // NY LOGIK: Vi skapar en bokning istället för att ändra passet
                 var newBooking = new Booking
